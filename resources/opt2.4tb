@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ANSI_X3.4-1968"?>
+<ToolBar>
+
+  <ToolBarItem name="query" text="Query" image="findnext" comment="Query by example"/>
+  <ToolBarItem name="new" text="New" image="new" comment="New record"/>
+  <ToolBarItem name="trash" text="Delete" image="garbage" comment="Delete record"/>
+  <!--
+  <ToolBarItem name="save" text="Save" image="filesave" comment="Delete record"/>
+  -->
+  
+  <ToolBarSeparator/>
+  
+  <ToolBarItem name="first" text="First" image="gobegin" comment="First record"/>
+  <ToolBarItem name="previous" text="Prev" image="prev" comment="Previous record"/>
+  <ToolBarItem name="next" text="Next" image="next" comment="Previous record"/>
+  <ToolBarItem name="last" text="Last" image="goend" comment="Last record"/>  
+  <!--
+  <ToolBarItem name="editcopy" />
+  <ToolBarItem name="editcut" />
+  <ToolBarItem name="editpaste" />
+  <ToolBarSeparator/>
+  -->
+  
+</ToolBar>

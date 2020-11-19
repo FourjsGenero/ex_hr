@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='ASCII'?>
+<api_class name="str" package="api" top="../" next="wc_c3chart">
+  <function name="ArraySet" modifier="public">
+    <api_synopsis> Set a dynamic array of strings from JSONarray string</api_synopsis>
+    <api_usage>
+      <pre> define a_items dynamic array of string
+ call str.ArraySet(a_items, '["Alpha","0","50","100","150","200","250"]')</pre>
+    </api_usage>
+    <api_param name="pa_str" type="DYNAMIC ARRAY OF STRING">Dynamic array of strings</api_param>
+    <api_param name="p_json" type="STRING">String with JSONarray</api_param>
+  </function>
+</api_class>

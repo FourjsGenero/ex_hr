@@ -1,0 +1,6 @@
+UI Types
+ - TUI (Informix 4GL)
+ - GUI (2005 first genero conversion)
+ - MOB (suitable for small device)
+ - RES (responsive?)
+ - MOD modern

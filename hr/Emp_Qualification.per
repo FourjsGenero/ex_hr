@@ -1,0 +1,31 @@
+schema hr
+
+layout (text="Qualification")
+  grid
+  {
+  <G g1                                                               > 
+   <T t1                                                             >
+   [p01       ][p02          ][p04                                   ]
+   [p01       ][p02          ][p04                                   ]
+   [p01       ][p02          ][p04                                   ]
+   [p01       ][p02          ][p04                                   ]
+  }
+  end --grid
+end --layout
+
+tables
+  qualification
+end --tables
+
+attributes
+  group g1 : text="Qualifications";
+  phantom qualification.employee_no;
+  dateedit p01 = qualification.qual_date, title="Date";
+  combobox p02 = qualification.qual_id, title="Type";
+  edit p04 = qualification.narrative, title="Details";
+end --attributes
+
+
+instructions
+  screen record qualification_scr(qualification.employee_no thru qualification.narrative);
+end --instructions

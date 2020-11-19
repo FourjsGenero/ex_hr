@@ -1,0 +1,78 @@
+schema hr
+
+layout (text="Employees")
+  grid
+  {
+   Employee Number [f01     ]                       
+  <G gname                                         > [p21                ]
+   First Name      [f02                          ]*  [                   ]
+   Middle Name(s)  [f03                          ]   [                   ]
+   Surname         [f04                          ]*  [                   ]
+   Preferred Name  [f05                          ]   [                   ]
+   Title           [f06       ]*                     [                   ]
+  <                                                > [                   ]
+  <G gpersonal                                                            >
+   Birth Date      [f07       ]*         Gender          [x]*
+  <                                                                       >
+  <G gcontact                                                             >
+   Address          [f11                                   ]*
+                    [f12                                   ]
+                    [f13                                   ]
+                    [f14                                   ]
+   Country          [f15               ]*   Postcode[f16   ]
+
+   Phone Number     [f17               ]*
+   Mobile Number    [f18               ]*
+   Email            [f19                                   ]*
+  <                                                                       >
+  <G gdash                                                                >
+   [p31                                ][p32                             ]
+   [                                   ][                                ]
+  <                                                                       >
+  }
+  end --grid
+end --layout
+
+tables
+  employee
+end --tables
+  
+attributes
+  f01 = employee.employee_no;
+
+  group gname: text="Name";
+  f02 = employee.firstname;
+  f03 = employee.middlenames;
+  f04 = employee.surname;
+  f05 = employee.preferredname;
+  combobox f06 = employee.title_id, not null;
+
+  group gpersonal: text="Personal Details";
+  dateedit f07 = employee.birthdate;
+  radiogroup x = employee.gender, not null, items=(("M","Male"),("F","Female")), orientation=horizontal;
+
+  group gcontact: text="Contact Details", style="collapsible";
+  f11 = employee.address1;
+  f12 = employee.address2;
+  f13 = employee.address3;
+  f14 = employee.address4;
+  combobox f15 = employee.country_id, not null;
+  f16 = employee.postcode;
+    
+  f17 = employee.phone;
+  f18 = employee.mobile;
+  f19 = employee.email;
+
+  image p21 = formonly.photo, width=12 characters, height=6 characters, sizepolicy=fixed, autoscale;
+
+  group gdash: text="Dashboard", style="collapsible";  
+  --% image p31 = formonly.dash1, width=24 characters, height=12 characters, sizepolicy=fixed, autoscale;
+  --% image p32 = formonly.dash2, width=24 characters, height=12 characters, sizepolicy=fixed, autoscale;
+  webcomponent p31 = formonly.dash1, componenttype="wc_c3chart", scrollbars=none, stretch=both;
+  webcomponent p32 = formonly.dash2, componenttype="wc_c3chart", scrollbars=none, stretch=both;
+end --attributes
+
+instructions
+  screen record emp_hdr(employee_no thru email);
+  screen record emp_pic(formonly.photo);
+end --intructions

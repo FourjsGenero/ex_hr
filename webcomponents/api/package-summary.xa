@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='ASCII'?>
+<package name="api" qname="webcomponents.api" top="../../">
+  <api_synopsis>
+ api</api_synopsis>
+  <api_usage> BDL level API for c3chart web component</api_usage>
+  <api_class name="wc_c3chart" package="webcomponents.api" top="../../">
+    <TYPE name="tColumn" type="DYNAMIC ARRAY OF STRING"/>
+    <TYPE name="tColumns" type="DYNAMIC ARRAY WITH DIMENSION 2 OF STRING"/>
+    <TYPE name="tTypes" type="DICTIONARY OF STRING"/>
+    <TYPE name="tGroup" type="DYNAMIC ARRAY OF STRING"/>
+    <TYPE name="tGroups" type="DYNAMIC ARRAY WITH DIMENSION 2 OF STRING"/>
+    <TYPE name="tData" type="RECORD &lt;anonymous wc_c3chart R1&gt;">
+      <RECORD>
+        <member name="x" type="STRING"/>
+        <member name="xFormat" type="STRING"/>
+        <member name="y" type="STRING"/>
+        <member name="yFormat" type="STRING"/>
+        <member name="columns" type="wc_c3chart.tColumns" type_name="tColumns"/>
+        <member name="type" type="STRING"/>
+        <member name="types" type="wc_c3chart.tTypes" type_name="tTypes"/>
+        <member name="groups" type="wc_c3chart.tGroups" type_name="tGroups"/>
+        <member name="onclick" type="STRING"/>
+      </RECORD>
+    </TYPE>
+    <TYPE name="tAxisType" type="RECORD &lt;anonymous wc_c3chart R3&gt;">
+      <RECORD>
+        <member name="type" type="STRING"/>
+        <member name="label" type="STRING"/>
+        <member name="categories" type="DYNAMIC ARRAY OF STRING"/>
+      </RECORD>
+    </TYPE>
+    <TYPE name="tAxis" type="RECORD &lt;anonymous wc_c3chart R5&gt;">
+      <RECORD>
+        <member name="rotated" type="BOOLEAN"/>
+        <member name="x" type="wc_c3chart.tAxisType" type_name="tAxisType"/>
+        <member name="y" type="wc_c3chart.tAxisType" type_name="tAxisType"/>
+      </RECORD>
+    </TYPE>
+    <TYPE name="tGridLines" type="RECORD &lt;anonymous wc_c3chart R7&gt;">
+      <RECORD>
+        <member name="show" type="BOOLEAN"/>
+        <member name="lines" type="DYNAMIC ARRAY OF STRING"/>
+      </RECORD>
+    </TYPE>
+    <TYPE name="tGrid" type="RECORD &lt;anonymous wc_c3chart R9&gt;">
+      <RECORD>
+        <member name="x" type="wc_c3chart.tGridLines" type_name="tGridLines"/>
+        <member name="y" type="wc_c3chart.tGridLines" type_name="tGridLines"/>
+      </RECORD>
+    </TYPE>
+    <TYPE name="tLegend" type="RECORD &lt;anonymous wc_c3chart R11&gt;">
+      <RECORD>
+        <member name="position" type="STRING"/>
+        <member name="show" type="BOOLEAN"/>
+      </RECORD>
+    </TYPE>
+    <TYPE name="tTooltip" type="RECORD &lt;anonymous wc_c3chart R13&gt;">
+      <RECORD>
+        <member name="show" type="BOOLEAN"/>
+        <member name="grouped" type="BOOLEAN"/>
+        <member name="format" type="STRING"/>
+      </RECORD>
+    </TYPE>
+    <TYPE name="tPadding" type="RECORD &lt;anonymous wc_c3chart R15&gt;">
+      <RECORD>
+        <member name="top" type="STRING"/>
+        <member name="right" type="STRING"/>
+        <member name="bottom" type="STRING"/>
+        <member name="left" type="STRING"/>
+      </RECORD>
+    </TYPE>
+    <TYPE name="tColor" type="RECORD &lt;anonymous wc_c3chart R17&gt;">
+      <RECORD>
+        <member name="pattern" type="DYNAMIC ARRAY OF STRING"/>
+      </RECORD>
+    </TYPE>
+    <TYPE name="tDoc" type="RECORD &lt;anonymous wc_c3chart R19&gt;">
+      <RECORD>
+        <member name="data" type="wc_c3chart.tData" type_name="tData"/>
+        <member name="axis" type="wc_c3chart.tAxis" type_name="tAxis"/>
+        <member name="grid" type="wc_c3chart.tGrid" type_name="tGrid"/>
+        <member name="legend" type="wc_c3chart.tLegend" type_name="tLegend"/>
+        <member name="tooltip" type="wc_c3chart.tTooltip" type_name="tTooltip"/>
+        <member name="padding" type="wc_c3chart.tPadding" type_name="tPadding"/>
+        <member name="color" type="wc_c3chart.tColor" type_name="tColor"/>
+      </RECORD>
+    </TYPE>
+    <TYPE name="tChart" type="RECORD &lt;anonymous wc_c3chart R21&gt;">
+      <RECORD>
+        <member name="field" type="STRING"/>
+        <member name="title" type="STRING"/>
+        <member name="narrative" type="STRING"/>
+        <member name="showfocus" type="BOOLEAN"/>
+        <member name="doc" type="wc_c3chart.tDoc" type_name="tDoc"/>
+      </RECORD>
+    </TYPE>
+    <TYPE name="tElement" type="RECORD &lt;anonymous wc_c3chart R23&gt;">
+      <RECORD>
+        <member name="x" type="STRING"/>
+        <member name="value" type="STRING"/>
+        <member name="id" type="STRING"/>
+        <member name="index" type="STRING"/>
+        <member name="name" type="STRING"/>
+      </RECORD>
+    </TYPE>
+    <VARIABLE name="m_trace" type="BOOLEAN"/>
+    <function name="Serialize">
+      <api_synopsis> Serialize a chart</api_synopsis>
+      <api_returnType>string</api_returnType>
+      <return>JSON string of tChart.doc structure</return>
+      <api_usage>
+        <pre> define r_chart wc_c3chart.tChart,
+   p_json string
+ let p_json = wc_c3chart.Serialize(r_chart.*)</pre>
+      </api_usage>
+      <api_param name="r_chart" type="wc_c3chart.tChart" type_name="tChart">tChart</api_param>
+      <RETURNS type="STRING"/>
+    </function>
+    <function name="Element">
+      <api_synopsis> DeSerialize a selected chart element</api_synopsis>
+      <api_returnType>tElement</api_returnType>
+      <return>Element record</return>
+      <api_usage>
+        <pre> define r_element tElement, p_json string
+ call wc_c3chart.Element(p_json) returning r_element</pre>
+      </api_usage>
+      <api_param name="p_json" type="STRING">JSON encoded element</api_param>
+      <RETURNS type="wc_c3chart.tElement" type_name="tElement"/>
+    </function>
+    <function name="Set">
+      <api_synopsis> Set initial contents of widget</api_synopsis>
+      <api_usage>
+        <pre> define r_chart tChart
+ let r_chart.data.x = "x"
+ ...
+ call wc_c3chart.Set(r_chart.*)</pre>
+      </api_usage>
+      <api_param name="r_chart" type="wc_c3chart.tChart" type_name="tChart">Chart instance</api_param>
+    </function>
+    <function name="Domain">
+      <api_synopsis> Returns list of possible values in a domain</api_synopsis>
+      <api_usage>
+        <pre> define a_list dynamic array of string
+ call wc_c3chart.Domain("chart_type") returning a_list</pre>
+      </api_usage>
+      <api_param name="p_domain" type="STRING">Domain to return possible values of</api_param>
+      <RETURNS type="DYNAMIC ARRAY OF STRING"/>
+    </function>
+    <function name="Column_Set">
+      <api_synopsis> Set tColumn of data from JSONArray string</api_synopsis>
+      <api_usage>
+        <pre> define p_json string, o_col tColumn
+ call wc_color.Column_Set('["alpha","100","180","240"]') returning o_col</pre>
+      </api_usage>
+      <api_param name="p_json" type="STRING">JSON array of strings</api_param>
+      <RETURNS type="wc_c3chart.tColumn" type_name="tColumn"/>
+    </function>
+    <function name="Create">
+      <api_synopsis> Creates a new instance of Chart</api_synopsis>
+      <api_returnType>tChart</api_returnType>
+      <return>Chart record</return>
+      <api_usage>
+        <pre> define r_acc wc_c3chart.tChart
+ call wc_c3chart.Create("formonly.p_chart") returning r_chart.*</pre>
+      </api_usage>
+      <api_param name="p_field" type="STRING">Form name of the field</api_param>
+      <RETURNS type="wc_c3chart.tChart" type_name="tChart"/>
+    </function>
+    <function name="Init">
+      <api_synopsis> Initialize</api_synopsis>
+      <api_usage>
+        <pre> call wc_c3chart.Init()</pre>
+      </api_usage>
+    </function>
+  </api_class>
+</package>

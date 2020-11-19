@@ -1,0 +1,12 @@
+h3,p {
+  font-family: Arial, Helvetica, 'Open Sans', san-serif;
+}
+
+h3 {
+  line-height: 1em;
+}
+
+p {
+  font-size: 0.8em;
+  line-height: 0.5em;
+}

@@ -1,0 +1,33 @@
+
+layout (text="Employees", version="000")
+
+  folder
+  
+    page list (text="List", image="textlistbullet")
+      form "Emp_List"
+    end --page:list
+    
+    page document (text="Document", image="file")
+      vbox
+      
+        form "Emp_Hdr"
+
+        form "Emp_Review"
+        
+        form "Emp_Qualification"
+          
+        form "Emp_Pay"
+
+        form "Emp_Leave"
+
+        form "Emp_Sick"
+
+        form "Emp_Travel"
+        
+      end --vbox
+    end --page: document
+    
+  end --folder
+  
+end--layout
+

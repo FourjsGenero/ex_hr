@@ -1,0 +1,3 @@
+dbi.default.driver = "dbmsqt"
+dbi.database.hr.source = "../data/hr.db"
+#dbi.database.hr.driver = "dbmsqt"

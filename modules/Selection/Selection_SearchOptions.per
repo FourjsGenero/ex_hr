@@ -1,0 +1,49 @@
+action defaults
+  action accept (defaultView=YES, text="Save", image="")
+  action cancel (defaultView=YES, text="Cancel", image="")
+  action append (defaultView=NO)
+  action delete (defaultView=NO)
+  action insert (defaultView=NO)
+end --action defaults
+
+  
+layout (text="Search Options")
+
+  vbox
+    grid
+    {
+    Fields to search
+    <table t1                  >
+    [x|f01                     ]
+    [x|f01                     ]
+    [x|f01                     ]
+    [x|f01                     ]
+    [x|f01                     ]
+    [x|f01                     ]
+    [x|f01                     ]
+    [x|f01                     ]
+    [x|f01                     ]
+    [x|f01                     ]
+    
+    [y]
+    [z]
+    }
+    end --grid
+  end --vbox
+end --layout
+
+attributes
+
+checkbox x = formonly.selected, not null;
+phantom formonly.column;
+edit f01 = formonly.name, title="Field", not null, noentry;
+phantom formonly.type;
+
+checkbox y = formonly.matchcase, not null, text="Match case";
+checkbox z = formonly.matchword, not null, text="Match whole word";
+
+end --attributes
+
+instructions
+
+screen record sca_columns[10] (selected thru type)

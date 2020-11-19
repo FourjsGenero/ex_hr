@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ANSI_X3.4-1968"?>
+<ToolBar>
+
+  <ToolBarItem name="query" text="Query" image="findnext" comment="Query by example"/>
+  <ToolBarItem name="new" text="New" image="new" comment="New record"/>
+  <ToolBarItem name="trash" text="Delete" image="garbage" comment="Delete record"/>
+  
+</ToolBar>

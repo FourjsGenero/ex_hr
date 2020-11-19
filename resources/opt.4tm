@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ANSI_X3.4-1968"?>
+<TopMenu>
+  <TopMenuGroup text="Employee">
+    <TopMenuCommand name="close" text="Quit" acceleratorName="alt-F4"/>
+  </TopMenuGroup>
+
+  <TopMenuGroup text="Document">
+    <TopMenuCommand name="query" text="Query" image="findnext"/>  
+    <TopMenuCommand name="new" text="New" image="new" />
+    <TopMenuCommand name="trash" text="Delete" image="garbage"/>
+    <TopMenuSeparator/>
+    <TopMenuCommand name="first" text="First" image="gobegin"/> 
+    <TopMenuCommand name="previous" text="Previous" image="prev"/>     
+    <TopMenuCommand name="next" text="Next" image="next"/>     
+    <TopMenuCommand name="last" text="Last" image="goend"/>         
+  </TopMenuGroup>
+  
+  <TopMenuGroup text="Edit">
+    <TopMenuCommand name="editcut" text="Cut"/>
+    <TopMenuCommand name="editcopy" text="Copy"/>
+    <TopMenuCommand name="editpaste" text="Paste"/>
+  </TopMenuGroup>
+  
+  <TopMenuGroup text="Help">
+    <TopMenuCommand name="help" text="Help" />
+    <TopMenuSeparator/>
+    <TopMenuCommand name="about" text="About" />
+  </TopMenuGroup>  
+</TopMenu>

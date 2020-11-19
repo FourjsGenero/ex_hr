@@ -1,0 +1,49 @@
+schema hr
+
+layout (text="Leave")
+  grid
+  {
+  <G g1                                                               > 
+   <T t1                                                             >
+   [p01       ][p02       ][p03  ][p04                           ][p05]
+   [p01       ][p02       ][p03  ][p04                           ][p05]
+   [p01       ][p02       ][p03  ][p04                           ][p05]
+   [p01       ][p02       ][p03  ][p04                           ][p05]
+   
+  <G g3                        >
+   <T t3                      >
+   [d01       ][d02   ][d03   ] 
+   [d01       ][d02   ][d03   ] 
+   [d01       ][d02   ][d03   ]  
+   [d01       ][d02   ][d03   ] 
+                       [f07   ]
+  }
+  end --grid
+end --layout
+
+tables
+  leave, annualleave
+end --tables
+
+attributes
+  group g1 : text="Leave Requests";
+  phantom leave.employee_no;
+  dateedit p01 = leave.start_date, title="Start Date";
+  dateedit p02 = leave.end_date, title="End Date";
+  edit p03 = leave.days, title="Days", format="#&.&&";
+  edit p04 = leave.reason, title="Reason";
+  checkbox p05 = leave.approved, title="Approved", valuechecked="Y", valueunchecked="N";
+
+  group g3 : text="Leave Accrual";
+  phantom annualleave.employee_no;
+  dateedit d01 = annualleave.annual_date, title="Date";
+  d02 = annualleave.annual_adjustment, title="Adjustment", format="##&.&&";
+  d03 = annualleave.annual_runningbalance, title="Balance",  format="##&.&&";
+  aggregate f07 = formonly.annual_balance, aggregateType=PROGRAM, aggregateText="Balance:";
+end --attributes
+
+
+instructions
+  screen record leave_scr(leave.employee_no thru leave.approved);
+  screen record annual_scr(annualleave.employee_no thru annualleave.annual_runningbalance);
+end --instructions

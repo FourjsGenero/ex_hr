@@ -1,0 +1,38 @@
+schema hr
+
+layout (text="Reviews")
+  grid
+  {
+  <G g1                                                               > 
+   <T t1                                                             >
+   [p01       ][p04                                                  ]
+   [p01       ][p04                                                  ]
+   [p01       ][p04                                                  ]
+   [p01       ][p04                                                  ]
+  [wc01                                                               ]
+  [                                                                   ]
+  [                                                                   ]
+  [                                                                   ]
+  }
+  end --grid
+end --layout
+
+tables
+  review
+end --tables
+
+attributes
+  group g1 : text="Reviews";
+  phantom review.employee_no;
+  dateedit p01 = review.review_date, title="Review Date";
+  edit p04 = review.summary, title="Reason";
+  phantom review.detail;
+  webcomponent wc01 = formonly.detail_edit, componenttype="fglrichtext", scrollbars=both, stretch=both,
+    properties = (toolbar = "undo|redo|aligncenter|alignjustify|alignleft|alignnone|alignright|bold|italic|underline|strikethrough|emoji|bullist|numlist|indent|outdent|linespacing|formatselect|color|fontselect|fontsizeselect|image|insert") ;
+end --attributes
+
+
+instructions
+  screen record review_scr(review.employee_no thru review.detail);
+  screen record reviewdetail_scr(formonly.detail_edit);
+end --instructions

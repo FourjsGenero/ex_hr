@@ -1,0 +1,37 @@
+schema hr
+
+layout(text="Employees")
+  grid ctn_main
+  {
+    [l00                                   :     :s1                   ]
+   <T t1                                                                >
+    [f0  |f1                            |f2                            |f3              ] 
+    [f0  |f1                            |f2                            |f3              ]
+    [f0  |f1                            |f2                            |f3              ]
+    [f0  |f1                            |f2                            |f3              ]
+    [f0  |f1                            |f2                            |f3              ]
+    [f0  |f1                            |f2                            |f3              ]
+    [f0  |f1                            |f2                            |f3              ]
+    [f0  |f1                            |f2                            |f3              ]
+    [f0  |f1                            |f2                            |f3              ]
+    [f0  |f1                            |f2                            |f3              ]
+  }
+  end --grid
+end --layout
+
+attributes
+  label l00: text="", style="hint";
+  buttonedit s1 = formonly.l_search, completer, image="fa-cog",
+    placeholder="Search", comment="Search", action=b_search ;
+    
+  table t1 : t1, doubleclick=accept, style="normal";
+  f0 = formonly.employee_no, title="No";
+  f1 = formonly.surname, title="Surname";
+  f2 = formonly.firstname, title="First Name";
+  f3 = formonly._position, title="Position";
+
+end --attributes
+
+instructions
+  screen record emp_list[10](employee_no thru _position);
+end --instructions

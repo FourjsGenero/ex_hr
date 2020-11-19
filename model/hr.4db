@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Schema gstVersion="30a09" id="{a4d17335-cea8-4016-871e-f48af9417503}" version="4.0">
+  <AGSettings version="1.1">
+    <DynamicProperties version="2">
+      <DynamicProperty description="Associated label when generating form" initialValue="" isDefaultInherited="false" isHidden="false" label="Label" name="label" readOnly="false" type="TEXT"/>
+      <DynamicProperty description="Associated widget" editorInfo="contains:ButtonEdit|CheckBox|ComboBox|DateEdit|DateTimeEdit|Edit|FFImage|FFLabel|Field|Phantom|ProgressBar|RadioGroup|Slider|SpinEdit|TextEdit|TimeEdit" initialValue="Edit" isDefaultInherited="false" isHidden="false" label="Widget" name="widget" readOnly="false" type="ENUM"/>
+      <DynamicPropertyGroup collapsed="false" description="Formfied properties" label="Formfield" name="formfieldGroup" properties="label;widget"/>
+    </DynamicProperties>
+    <NodeInfos version="1">
+      <NodeInfo mimeType="db/column" properties="widget;label"/>
+    </NodeInfos>
+  </AGSettings>
+  <ExtractionSettings last="IBM Informix">
+    <ExtractionOptions casens="LowerCase" cvmeth="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" ignerr="true" systab="false" type="IBM Informix"/>
+  </ExtractionSettings>
+  <Table active="true" name="activity" status="U" uuid="db/table2">
+    <Column fglLength="8" fglType="0" name="activity_code" notNull="true" order="1" status="U" uuid="db/column2"/>
+    <Column fglLength="30" fglType="0" name="description" notNull="true" order="2" status="U" uuid="db/column4"/>
+    <Index indexColumns="activity_code" indexConstraint="primaryKey" name="cx_activity000" status="U" uuid="db/index2"/>
+  </Table>
+  <Table active="true" name="annualleave" status="U" uuid="db/table4">
+    <Column fglLength="4" fglType="2" name="employee_no" notNull="true" order="1" status="U" uuid="db/column6"/>
+    <Column fglLength="4" fglType="7" name="annual_date" notNull="true" order="2" status="U" uuid="db/column8"/>
+    <Column fglLength="2818" fglType="5" name="annual_adjustment" notNull="true" order="3" status="U" uuid="db/column10"/>
+    <Column fglLength="2818" fglType="5" name="annual_runningbalance" notNull="true" order="4" status="U" uuid="db/column12"/>
+    <Index indexColumns="employee_no, annual_date" indexConstraint="primaryKey" name="cx_annlv000" status="U" uuid="db/index4"/>
+  </Table>
+  <Table active="true" name="employee" status="U" uuid="db/table6">
+    <Column fglLength="4" fglType="2" name="employee_no" notNull="true" order="1" status="U" uuid="db/column14"/>
+    <Column fglLength="30" fglType="0" name="firstname" notNull="true" order="2" status="U" uuid="db/column16"/>
+    <Column fglLength="30" fglType="0" name="middlenames" notNull="false" order="3" status="U" uuid="db/column18"/>
+    <Column fglLength="30" fglType="0" name="surname" notNull="true" order="4" status="U" uuid="db/column20"/>
+    <Column fglLength="30" fglType="0" name="preferredname" notNull="false" order="5" status="U" uuid="db/column22"/>
+    <Column fglLength="8" fglType="0" name="title_id" notNull="true" order="6" status="M" uuid="db/column24"/>
+    <Column fglLength="4" fglType="7" name="birthdate" notNull="true" order="7" status="U" uuid="db/column26"/>
+    <Column fglLength="1" fglType="0" name="gender" notNull="true" order="8" status="U" uuid="db/column28"/>
+    <Column fglLength="40" fglType="0" name="address1" notNull="true" order="9" status="U" uuid="db/column30"/>
+    <Column fglLength="40" fglType="0" name="address2" notNull="false" order="10" status="U" uuid="db/column32"/>
+    <Column fglLength="40" fglType="0" name="address3" notNull="false" order="11" status="U" uuid="db/column34"/>
+    <Column fglLength="40" fglType="0" name="address4" notNull="false" order="12" status="U" uuid="db/column36"/>
+    <Column fglLength="3" fglType="0" name="country_id" notNull="true" order="13" status="M" uuid="db/column38"/>
+    <Column fglLength="10" fglType="0" name="postcode" notNull="true" order="14" status="U" uuid="db/column40"/>
+    <Column fglLength="1" fglType="0" name="restrict_address" notNull="true" order="15" status="R" uuid="db/column42"/>
+    <Column fglLength="20" fglType="0" name="phone" notNull="true" order="16" status="U" uuid="db/column44"/>
+    <Column fglLength="1" fglType="0" name="restrict_phone" notNull="true" order="17" status="R" uuid="db/column46"/>
+    <Column fglLength="20" fglType="0" name="mobile" notNull="true" order="18" status="U" uuid="db/column48"/>
+    <Column fglLength="1" fglType="0" name="restrict_mobile" notNull="true" order="19" status="R" uuid="db/column50"/>
+    <Column fglLength="40" fglType="0" name="email" notNull="false" order="20" status="U" uuid="db/column52"/>
+    <Column fglLength="4" fglType="7" name="startdate" notNull="false" order="21" status="U" uuid="db/column54"/>
+    <Column fglLength="20" fglType="0" name="position" notNull="true" order="22" status="U" uuid="db/column56"/>
+    <Column fglLength="20" fglType="0" name="taxnumber" notNull="true" order="23" status="U" uuid="db/column58"/>
+    <Column fglLength="2562" fglType="5" name="base" notNull="true" order="24" status="U" uuid="db/column60"/>
+    <Column fglLength="3" fglType="0" name="basetype" notNull="true" order="25" status="U" uuid="db/column62"/>
+    <Column fglLength="1281" fglType="5" name="sick_balance" notNull="true" order="26" status="U" uuid="db/column64"/>
+    <Column fglLength="1281" fglType="5" name="annual_balance" notNull="true" order="27" status="U" uuid="db/column66"/>
+    <Index indexColumns="employee_no" indexConstraint="primaryKey" name="cx_empl000" status="U" uuid="db/index6"/>
+    <Index indexColumns="surname" indexConstraint="index" name="ix_empl001" status="U" uuid="db/index8"/>
+  </Table>
+  <Table active="true" name="paysummary" status="U" uuid="db/table8">
+    <Column fglLength="4" fglType="2" name="employee_no" notNull="true" order="1" status="U" uuid="db/column68"/>
+    <Column fglLength="4" fglType="7" name="pay_date" notNull="true" order="2" status="U" uuid="db/column70"/>
+    <Column fglLength="2562" fglType="5" name="pay_amount" notNull="true" order="3" status="U" uuid="db/column72"/>
+    <Index indexColumns="employee_no, pay_date" indexConstraint="primaryKey" name="cx_paysum000" status="U" uuid="db/index10"/>
+  </Table>
+  <Table active="true" name="sickleave" status="U" uuid="db/table10">
+    <Column fglLength="4" fglType="2" name="employee_no" notNull="true" order="1" status="U" uuid="db/column74"/>
+    <Column fglLength="4" fglType="7" name="sick_date" notNull="true" order="2" status="U" uuid="db/column76"/>
+    <Column fglLength="2818" fglType="5" name="sick_adjustment" notNull="true" order="3" status="U" uuid="db/column78"/>
+    <Column fglLength="2818" fglType="5" name="sick_runningbalance" notNull="true" order="4" status="U" uuid="db/column80"/>
+    <Index indexColumns="employee_no, sick_date" indexConstraint="primaryKey" name="cx_sicklv000" status="U" uuid="db/index12"/>
+  </Table>
+  <Table active="true" name="timesheet_dtl" status="U" uuid="db/table12">
+    <Column fglLength="4" fglType="2" name="tsheet_no" notNull="true" order="1" status="U" uuid="db/column82"/>
+    <Column fglLength="8" fglType="0" name="activity_code" notNull="true" order="2" status="U" uuid="db/column84"/>
+    <Column fglLength="40" fglType="0" name="narrative" notNull="false" order="3" status="U" uuid="db/column86"/>
+    <Column fglLength="1282" fglType="5" name="hours" notNull="true" order="4" status="U" uuid="db/column88"/>
+    <Index indexColumns="tsheet_no, activity_code" indexConstraint="primaryKey" name="cx_tsdtl000" status="U" uuid="db/index14"/>
+  </Table>
+  <Table active="true" name="timesheet_hdr" status="U" uuid="db/table14">
+    <Column fglLength="4" fglType="2" name="tsheet_no" notNull="true" order="1" status="U" uuid="db/column90"/>
+    <Column fglLength="4" fglType="7" name="tsheet_date" notNull="true" order="2" status="U" uuid="db/column92"/>
+    <Column fglLength="4" fglType="2" name="employee_no" notNull="true" order="3" status="U" uuid="db/column94"/>
+    <Column fglLength="40" fglType="0" name="comment" notNull="false" order="4" status="U" uuid="db/column96"/>
+    <Index indexColumns="tsheet_no" indexConstraint="primaryKey" name="cx_tshdr000" status="U" uuid="db/index16"/>
+  </Table>
+  <Table active="true" name="country" status="A" uuid="db/table16">
+    <Column fglLength="3" fglType="0" name="country_id" notNull="true" order="1" status="A" uuid="db/column98"/>
+    <Column fglLength="20" fglType="0" name="name" notNull="true" order="2" status="A" uuid="db/column100"/>
+    <Column fglLength="4" fglType="0" name="phone_code" notNull="true" order="3" status="A" uuid="db/column120"/>
+    <Column fglLength="4" fglType="2" name="postcode_length" notNull="true" order="4" status="A" uuid="db/column122"/>
+    <Index indexColumns="country_id" indexConstraint="primaryKey" name="PK_country_1" status="A" uuid="db/index26"/>
+  </Table>
+  <Table active="true" name="title" status="A" uuid="db/table18">
+    <Column fglLength="8" fglType="0" name="title_id" notNull="true" order="1" status="A" uuid="db/column102"/>
+    <Column fglLength="20" fglType="0" name="description" notNull="true" order="2" status="A" uuid="db/column104"/>
+    <Index indexColumns="title_id" indexConstraint="primaryKey" name="PK_honorific_1" status="A" uuid="db/index24"/>
+  </Table>
+  <Table active="true" name="qualification" status="A" uuid="db/table20">
+    <Column fglLength="4" fglType="2" name="employee_no" notNull="true" order="1" status="A" uuid="db/column126"/>
+    <Column fglLength="4" fglType="7" name="qual_date" notNull="true" order="2" status="A" uuid="db/column115"/>
+    <Column fglLength="8" fglType="0" name="qual_id" notNull="true" order="3" status="A" uuid="db/column106"/>
+    <Column fglLength="80" fglType="201" name="narrative" notNull="false" order="4" status="A" uuid="db/column117"/>
+    <Index indexColumns="employee_no, qual_date" indexConstraint="primaryKey" name="PK_qualification_1" status="A" uuid="db/index22"/>
+  </Table>
+  <Table active="true" name="qual_type" status="A" uuid="db/table22">
+    <Column fglLength="8" fglType="0" name="qual_id" notNull="true" order="1" status="A" uuid="db/column108"/>
+    <Column fglLength="4" fglType="2" name="level" notNull="true" order="2" status="A" uuid="db/column110"/>
+    <Column fglLength="50" fglType="0" name="description" notNull="true" order="3" status="A" uuid="db/column112"/>
+    <Index indexColumns="qual_id" indexConstraint="primaryKey" name="PK_qual_type_1" status="A" uuid="db/index20"/>
+  </Table>
+  <Table active="true" name="review" status="A" uuid="db/table223">
+    <Column fglLength="4" fglType="2" name="employee_no" notNull="true" order="1" status="A" uuid="db/column1231"/>
+    <Column fglLength="4" fglType="7" name="review_date" notNull="true" order="2" status="A" uuid="db/column1233"/>
+    <Column fglLength="50" fglType="0" name="summary" notNull="true" order="3" status="A" uuid="db/column1235"/>
+    <Column fglLength="1000" fglType="201" name="detail" notNull="false" order="4" status="A" uuid="db/column1237"/>
+    <Index indexColumns="employee_no, review_date" indexConstraint="primaryKey" name="PK_review_1" status="A" uuid="db/index243"/>
+  </Table>
+  <Table active="true" name="leave" status="A" uuid="db/table225">
+    <Column fglLength="4" fglType="2" name="employee_no" notNull="true" order="1" status="A" uuid="db/column1239"/>
+    <Column fglLength="4" fglType="7" name="start_date" notNull="true" order="2" status="A" uuid="db/column1241"/>
+    <Column fglLength="4" fglType="7" name="end_date" notNull="true" order="3" status="A" uuid="db/column1243"/>
+    <Column fglLength="1282" fglType="5" name="days" notNull="true" order="4" status="A" uuid="db/column1245"/>
+    <Column fglLength="50" fglType="0" name="reason" notNull="true" order="5" status="A" uuid="db/column1247"/>
+    <Column fglLength="1" fglType="0" name="approved" notNull="true" order="6" status="A" uuid="db/column1249"/>
+    <Index indexColumns="employee_no, start_date" indexConstraint="primaryKey" name="PK_leave_1" status="A" uuid="db/index245"/>
+  </Table>
+  <Table active="true" name="travel" status="A" uuid="db/table227">
+    <Column fglLength="4" fglType="2" name="employee_no" notNull="true" order="1" status="A" uuid="db/column1256"/>
+    <Column fglLength="4" fglType="7" name="start_date" notNull="true" order="2" status="A" uuid="db/column1257"/>
+    <Column fglLength="4" fglType="7" name="end_date" notNull="true" order="3" status="A" uuid="db/column1258"/>
+    <Column fglLength="1282" fglType="5" name="days" notNull="true" order="4" status="A" uuid="db/column1259"/>
+    <Column fglLength="50" fglType="0" name="reason" notNull="true" order="5" status="A" uuid="db/column1260"/>
+    <Column fglLength="1" fglType="0" name="approved" notNull="true" order="6" status="A" uuid="db/column1261"/>
+    <Index indexColumns="employee_no, start_date" indexConstraint="primaryKey" name="PK_travel_1" status="A" uuid="db/index249"/>
+  </Table>
+  <Table active="true" name="sick" status="A" uuid="db/table229">
+    <Column fglLength="4" fglType="2" name="employee_no" notNull="true" order="1" status="A" uuid="db/column1268"/>
+    <Column fglLength="4" fglType="7" name="start_date" notNull="true" order="2" status="A" uuid="db/column1269"/>
+    <Column fglLength="4" fglType="7" name="end_date" notNull="true" order="3" status="A" uuid="db/column1270"/>
+    <Column fglLength="1282" fglType="5" name="days" notNull="true" order="4" status="A" uuid="db/column1271"/>
+    <Column fglLength="50" fglType="0" name="reason" notNull="true" order="5" status="A" uuid="db/column1272"/>
+    <Column fglLength="1" fglType="0" name="medical" notNull="true" order="6" status="A" uuid="db/column1273"/>
+    <Index indexColumns="employee_no, start_date" indexConstraint="primaryKey" name="PK_sick_1" status="A" uuid="db/index247"/>
+  </Table>
+  <Table active="true" name="document" status="A" uuid="db/table41">
+    <Column fglLength="4" fglType="2" name="employee_no" notNull="true" order="1" status="A" uuid="db/column216"/>
+    <Column fglLength="40" fglType="0" name="doc_id" notNull="true" order="2" status="A" uuid="db/column218"/>
+    <Column fglLength="56" fglType="11" name="content" notNull="false" order="3" status="A" uuid="db/column220"/>
+    <Index indexColumns="employee_no, doc_id" indexConstraint="primaryKey" name="PK_document_1" status="A" uuid="db/index42"/>
+  </Table>
+  <ForeignKey cascadeDelete="false" fkColumns="employee_no" fkRefColumns="employee_no" name="cx_annlv001" refTable="employee" status="U" table="annualleave" uuid="db/foreignkey2"/>
+  <ForeignKey cascadeDelete="false" fkColumns="employee_no" fkRefColumns="employee_no" name="cx_paysum001" refTable="employee" status="U" table="paysummary" uuid="db/foreignkey4"/>
+  <ForeignKey cascadeDelete="false" fkColumns="employee_no" fkRefColumns="employee_no" name="cx_sicklv001" refTable="employee" status="U" table="sickleave" uuid="db/foreignkey6"/>
+  <ForeignKey cascadeDelete="false" fkColumns="tsheet_no" fkRefColumns="tsheet_no" name="cx_tsdtl001" refTable="timesheet_hdr" status="U" table="timesheet_dtl" uuid="db/foreignkey8"/>
+  <ForeignKey cascadeDelete="false" fkColumns="activity_code" fkRefColumns="activity_code" name="cx_tsdtl002" refTable="activity" status="U" table="timesheet_dtl" uuid="db/foreignkey10"/>
+  <ForeignKey cascadeDelete="false" fkColumns="employee_no" fkRefColumns="employee_no" name="cx_tshdr001" refTable="employee" status="U" table="timesheet_hdr" uuid="db/foreignkey12"/>
+  <ForeignKey cascadeDelete="false" fkColumns="qual_id" fkRefColumns="qual_id" name="FK_qualification_qual_type_1" refTable="qual_type" status="A" table="qualification" uuid="db/foreignkey14"/>
+  <ForeignKey cascadeDelete="false" fkColumns="country_id" fkRefColumns="country_id" name="FK_employee_country_1" refTable="country" status="A" table="employee" uuid="db/foreignkey16"/>
+  <ForeignKey cascadeDelete="false" fkColumns="title_id" fkRefColumns="title_id" name="FK_employee_title_1" refTable="title" status="A" table="employee" uuid="db/foreignkey18"/>
+  <ForeignKey cascadeDelete="false" fkColumns="employee_no" fkRefColumns="employee_no" name="FK_qualification_employee_1" refTable="employee" status="A" table="qualification" uuid="db/foreignkey20"/>
+  <ForeignKey cascadeDelete="true" fkColumns="employee_no" fkRefColumns="employee_no" name="FK_review_employee_1" refTable="employee" status="A" table="review" uuid="db/foreignkey201"/>
+  <ForeignKey cascadeDelete="false" fkColumns="employee_no" fkRefColumns="employee_no" name="FK_leave_request_employee_1" refTable="employee" status="A" table="leave" uuid="db/foreignkey203"/>
+  <ForeignKey cascadeDelete="false" fkColumns="employee_no" fkRefColumns="employee_no" name="FK_leave_request_employee_1_1" refTable="employee" status="A" table="travel" uuid="db/foreignkey205"/>
+  <ForeignKey cascadeDelete="false" fkColumns="employee_no" fkRefColumns="employee_no" name="FK_leave_request_employee_1_1_1" refTable="employee" status="A" table="sick" uuid="db/foreignkey207"/>
+  <ForeignKey cascadeDelete="false" fkColumns="employee_no" fkRefColumns="employee_no" name="FK_document_employee_1" refTable="employee" status="A" table="document" uuid="db/foreignkey35"/>
+  <Views ActiveView="View-1" showLabels="true">
+    <View Name="View-1">
+      <Layout>
+        <![CDATA[AAAAAgAAABQAZABiAC8AdABhAGIAbABlADEAMkCTi0tLS0tLQE6tLS0tLTA/3vnbItDlZwEAAAAUAGQAYgAvAHQAYQBiAGwAZQAyADJAcWAAAAAAAECD8AAAAAAAP/IUeuFHrdcBAAAAFABkAGIALwB0AGEAYgBsAGUANAAxQIxYAAAAAABAhbgAAAAAAD/0XjU/fO0NAQAAABIAZABiAC8AdABhAGIAbABlADJAlAXh4eHh4kBrQeHh4eHiP987ZFocrA8BAAAAEgBkAGIALwB0AGEAYgBsAGUANEBVA8PDw8PEQES0tLS0tLQ/8SsCDEm6PQEAAAAWAGQAYgAvAHQAYQBiAGwAZQAyADIAN0CMUAAAAAAAQIuYAAAAAAA/8zdLxqfvPQEAAAAUAGQAYgAvAHQAYQBiAGwAZQAxADhAjkgAAAAAAEBdQAAAAAAAP+Ao9cKPXCwBAAAAFgBkAGIALwB0AGEAYgBsAGUAMgAyADNAgaAAAAAAAECFeAAAAAAAP/LtkWhyr8kBAAAAEgBkAGIALwB0AGEAYgBsAGUANkCB6AAAAAAAwFjAAAAAAAA/8l41P3ztSwEAAAAWAGQAYgAvAHQAYQBiAGwAZQAyADIAOUCB+AAAAAAAQJBcAAAAAAA/8x64UeuEwQEAAAAUAGQAYgAvAHQAYQBiAGwAZQAxADZAjXAAAAAAAEBxsAAAAAAAP+h64UeuFIABAAAAFABkAGIALwB0AGEAYgBsAGUAMQA0QJOB4eHh4eLAWN4eHh4eHj/euFHrhR6/AQAAABQAZABiAC8AdABhAGIAbABlADIAMEBw4AAAAAAAQH4AAAAAAAA/9C0OVgQYFQEAAAAWAGQAYgAvAHQAYQBiAGwAZQAyADIANUCByAAAAAAAQIqwAAAAAAA/8v3ztkWhcQEAAAASAGQAYgAvAHQAYQBiAGwAZQA4QF6AAAAAAADAW8AAAAAAAD/HbItDlYELAQAAABQAZABiAC8AdABhAGIAbABlADEAMEBgAeHh4eHiQHLVpaWlpaY/xmZmZmZmawE=]]>
+      </Layout>
+    </View>
+  </Views>
+  <DBData>
+    <Data path="db/column24@fglLength" type="2" value="5"/>
+    <Data path="db/column24@fglType" type="2" value="0"/>
+    <Data path="db/column24@name" type="10" value="title"/>
+    <Data path="db/column24@notNull" type="1" value="false"/>
+    <Data path="db/column38@fglLength" type="2" value="20"/>
+    <Data path="db/column38@fglType" type="2" value="0"/>
+    <Data path="db/column38@name" type="10" value="country"/>
+  </DBData>
+</Schema>

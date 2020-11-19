@@ -1,0 +1,35 @@
+Emp2 - Extensions
+
+Introduce Images
+Attachments Documents
+Drag n Drop (images and docs)
+
+
+Payroll
+ Payroll
+ Pay History
+Entitlements
+ Sick
+ Annual
+
++ Reviews
+  date
+  summary
+  detail
++ Leave Requests
+  start_date
+  end_date
+  reason
+  approved
++ Travel Requests
+  startData
+  endDate
+  reason
+  approved
++ Qualifications
+  date
+  qualification
+  grade
+
+Medical
+Statistics

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ANSI_X3.4-1968"?>
+<!--
+Property of Four Js*
+(c) Copyright Four Js 1995, 2017. All Rights Reserved.
+* Trademark of Four Js Development Tools Europe Ltd
+  in the United States and elsewhere
+
+  This file can be modified by licensees according to the
+  product manual.
+-->
+
+<ActionDefaultList>
+
+  <!-- Modified -->
+  <ActionDefault name="next" text="" image="next" comment="Next record" contextMenu="no"/>
+  <ActionDefault name="previous" text="" image="prev" comment="Previous record" contextMenu="no"/>
+  <ActionDefault name="first" text="" image="gobegin" comment="First record" contextMenu="no"/>
+  <ActionDefault name="last" text="" image="goend" comment="Last record" contextMenu="no"/>
+
+  <ActionDefault name="query" text="Query" image="findnext" comment="Query by example" contextMenu="no"/>
+  <ActionDefault name="new" text="New" image="new" comment="New record" contextMenu="no"/>
+  <ActionDefault name="trash" text="Delete" image="garbage" comment="Delete record" contextMenu="no"/>
+  <ActionDefault name="save" text="Save" image="filesave" comment="Delete record" contextMenu="no"/>
+
+  <ActionDefault name="delete" validate="no" image="export" text="" acceleratorName="F4" contextMenu="no"/>
+  <ActionDefault name="insert" text="" image="import" acceleratorName="F3" contextMenu="no"/>
+  <ActionDefault name="append" text="" image="fa-angle-double-down" acceleratorName="Control-F3" contextMenu="no"/>
+
+  <!-- Standard -->
+  <ActionDefault name="accept" text="OK" acceleratorName="Return" acceleratorName2="Enter" contextMenu="no"/>
+  <ActionDefault name="cancel" validate="no" text="Cancel" acceleratorName="Escape" contextMenu="no"/>
+  <ActionDefault name="update" text="Update" />
+  <ActionDefault name="help" validate="no" text="Help" acceleratorName="F1" contextMenu="no"/>
+  <ActionDefault name="close" validate="no" text="Close" acceleratorName="Alt-F4" defaultView="no" contextMenu="no"/>
+  <ActionDefault name="interrupt" text="Interrupt" contextMenu="no"/>
+  <ActionDefault name="print" text="Print" image="printer" comment="Print" contextMenu="no"/>
+  <ActionDefault name="find"     acceleratorName="Control-F" text="Find" image="find" comment="Search"/>
+  <ActionDefault name="findnext" acceleratorName="Control-G" text="Find Next" image="findnext" comment="Search"/>
+  <ActionDefault name="editcopy" text="Copy" image="copy" comment="Copy" acceleratorName="Control-C" contextMenu="no"/>
+  <ActionDefault name="editcut" text="Cut" image="cut" comment="Cut" acceleratorName="Control-X" contextMenu="no"/>
+  <ActionDefault name="editpaste" text="Paste" image="paste" comment="Paste" acceleratorName="Control-V" contextMenu="no"/>
+  <ActionDefault name="nextfield" text="Next Field" acceleratorName="Tab" contextMenu="no"/>
+  <ActionDefault name="prevfield" text="Previous Field" acceleratorName="Shift-Tab" contextMenu="no"/>
+  <ActionDefault name="nextrow" text="Next" image="goforw" acceleratorName="Down" contextMenu="no"/>
+  <ActionDefault name="prevrow" text="Previous" image="gorev" acceleratorName="Up" contextMenu="no"/>
+  <ActionDefault name="firstrow" text="First" image="gobegin" acceleratorName="Home" contextMenu="no"/>
+  <ActionDefault name="lastrow" text="Last" image="goend" acceleratorName="End" contextMenu="no"/>
+  <ActionDefault name="nextpage" text="Next Page" acceleratorName="Next" contextMenu="no"/>
+  <ActionDefault name="prevpage" text="Previous Page" acceleratorName="Prior" contextMenu="no"/>
+  <ActionDefault name="nexttab" text="Next Folder Tab" acceleratorName="Control-Tab" contextMenu="no"/>
+  <ActionDefault name="prevtab" text="Previous Folder Tab" acceleratorName="Control-Shift-Tab" contextMenu="no"/>
+  <ActionDefault name="dialogtouched" validate="no" defaultView="no"  contextMenu="no"/>
+</ActionDefaultList>

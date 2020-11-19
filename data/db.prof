@@ -1,0 +1,5 @@
+#
+# hr sqlite database
+#
+dbi.database.hr.driver = "dbmsqt"
+dbi.database.hr.source = "hr.db"
