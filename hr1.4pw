@@ -94,7 +94,6 @@
         <File filePath="hr/Emp_Sick.per"/>
         <File filePath="hr/Emp_Travel.per"/>
         <File filePath="hr/Employee.per"/>
-        <File filePath="hr/Employee_b4tab.per"/>
       </VirtualFolder>
     </Application>
   </Group>

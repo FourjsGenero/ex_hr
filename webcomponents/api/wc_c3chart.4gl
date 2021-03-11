@@ -177,8 +177,6 @@ end function
 #! tChart.Serialize
 #+ Serialize a chart
 #+
-#+ @param r_chart   tChart
-#+
 #+ @returnType string
 #+ @return JSON string of tChart.doc structure
 #+
@@ -199,8 +197,6 @@ end function
 #
 #! tChart.Set
 #+ Set initial contents of widget
-#+
-#+ @param r_chart  Chart instance
 #+
 #+ @code
 #+ define r_chart tChart

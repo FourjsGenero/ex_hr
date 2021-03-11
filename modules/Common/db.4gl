@@ -139,12 +139,11 @@ public function Open(p_database string)
     return NOTFOUND
   end if
 
-  -- close previous db and open this one - IMPLICIT
-  #try
-  #  close database
-  #catch
-  #end try
-  database p_database
+  -- implicitly close previous db and open this one
+  try
+    database p_database
+  catch
+  end try
 
   return status
   

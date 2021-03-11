@@ -40,10 +40,10 @@ public function Run(p_request)
 
       menu "Menu"
         before menu
-          show option "Test1"
+          -- show option "Test1"
         command "Employee"
           call Emp_Con.Show()
-        command "Test1"
+        -- command "Test1"
         command key('q')
           exit menu
         on action cancel
