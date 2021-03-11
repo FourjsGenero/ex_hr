@@ -47,3 +47,5 @@ DX enhancements include:
 * Pass By Reference (inout)
 * Methods (for Record Types)
 * Literal Initialization
+
+NOTE: If it doesn't Build All successfully the first time, just Build All again.
