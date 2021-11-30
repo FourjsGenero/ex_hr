@@ -1,44 +1,46 @@
 
-layout (text="Employees", version="001")
+layout (text=%"Employees", version="001")
 
   folder
   
-    page list (text="List", image="textlistbullet")
+    page list (text=%"List", image="textlistbullet")
       form "Emp_List"
     end --page:list
     
-    page document (text="Document", image="file")
+    page document (text=%"Document", image="file")
       hbox
       
         form "Emp_Hdr"
         
         folder (style="accordion")
 
-          page review (text="Reviews", image="sum")
+          page review (text=%"Reviews", image="sum")
             form "Emp_Review"
           end --page:review
           
-          page qualification (text="Qualifications", image="fa-graduation-cap")
+          page qualification (text=%"Qualifications", image="fa-graduation-cap")
             form "Emp_Qualification"
           end --page:qualification
           
-          page pay (text="Pay", image="fa-dollar") 
+          page pay (text=%"Pay", image="fa-dollar") 
             form "Emp_Pay"
           end --page:pay
           
-          page leave (text="Leave", image="fa-automobile")
+          page leave (text=%"Leave", image="fa-automobile")
             form "Emp_Leave"
           end --page:leave
 
-          page sick (text="Medical", image="fa-ambulance")
-            form "Emp_Sick"
+          page sick (text=%"Medical", image="fa-ambulance")
+            form "Emp_Medical"
           end --page:sick
 
-          page travel (text="Travel", image="lingua")
+          page travel (text=%"Travel", image="lingua")
             form "Emp_Travel"
           end --page:travel
           
         end --folder
+
+        form "Emp_ExtPhoto" --%placeholder for Rx
         
       end --hbox
     end --page: document

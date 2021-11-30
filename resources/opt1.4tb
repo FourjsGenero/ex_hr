@@ -4,5 +4,6 @@
   <ToolBarItem name="query" text="Query" image="findnext" comment="Query by example"/>
   <ToolBarItem name="new" text="New" image="new" comment="New record"/>
   <ToolBarItem name="trash" text="Delete" image="garbage" comment="Delete record"/>
+  <ToolBarItem name="info" text="Info" image="fa-question" comment="Info"/>
   
 </ToolBar>

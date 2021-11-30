@@ -10,6 +10,12 @@
 #! Connect      Open a conection to a database
 #
 
+--% package Common
+
+import FGL fgldbutl
+
+
+
 
 #
 #! Transact
@@ -42,11 +48,11 @@ public function Transact(p_transact string)
   
   case p_transact.getCharAt(1)
   when "B"  #Begin
-    let l_status = db_start_transaction()
+    let l_status = fgldbutl.db_start_transaction()
   when "C"  #Commit
-    let l_status = db_finish_transaction(TRUE)
+    let l_status = fgldbutl.db_finish_transaction(TRUE)
   when "R"  #Rollback
-    let l_status = db_finish_transaction(FALSE)
+    let l_status = fgldbutl.db_finish_transaction(FALSE)
   otherwise
     let l_status = 100  #notfound
   end case
@@ -54,6 +60,8 @@ public function Transact(p_transact string)
   return l_status
   
 end function
+
+
 
 
 #
@@ -74,8 +82,10 @@ end function
 
 public function Begin()
   returns (boolean)
-  return IIF(db_start_transaction() = 0, TRUE, FALSE)
+  return IIF(fgldbutl.db_start_transaction() = 0, TRUE, FALSE)
 end function
+
+
 
 #
 #! Commit
@@ -90,8 +100,10 @@ end function
 
 public function Commit()
   returns (integer)
-  return IIF(db_finish_transaction(TRUE) = 0, TRUE, FALSE)
+  return IIF(fgldbutl.db_finish_transaction(TRUE) = 0, TRUE, FALSE)
 end function
+
+
 
 #
 #! Rollback
@@ -106,8 +118,9 @@ end function
 
 public function Rollback()
   returns (integer)
-  return IIF(db_finish_transaction(FALSE) = 0, TRUE, FALSE)
+  return IIF(fgldbutl.db_finish_transaction(FALSE) = 0, TRUE, FALSE)
 end function
+
 
 
 #

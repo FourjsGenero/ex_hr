@@ -1,15 +1,27 @@
-<?xml version='1.0' encoding='ASCII'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <package name="api" qname="webcomponents.api" top="../../">
   <api_synopsis>
  api</api_synopsis>
   <api_usage> BDL level API for c3chart web component</api_usage>
-  <api_class name="wc_c3chart" package="webcomponents.api" top="../../">
-    <TYPE name="tColumn" type="DYNAMIC ARRAY OF STRING"/>
-    <TYPE name="tColumns" type="DYNAMIC ARRAY WITH DIMENSION 2 OF STRING"/>
-    <TYPE name="tTypes" type="DICTIONARY OF STRING"/>
-    <TYPE name="tGroup" type="DYNAMIC ARRAY OF STRING"/>
-    <TYPE name="tGroups" type="DYNAMIC ARRAY WITH DIMENSION 2 OF STRING"/>
-    <TYPE name="tData" type="RECORD &lt;anonymous wc_c3chart R1&gt;">
+  <api_usage></api_usage>
+  <api_class name="str" package="webcomponents.api" top="../../" next="wc_c3chart">
+    <function name="ArraySet" modifier="public">
+      <api_synopsis> Set a dynamic array of strings from JSONarray string</api_synopsis>
+      <api_usage>
+        <pre> define a_items dynamic array of string
+ call str.ArraySet(a_items, '["Alpha","0","50","100","150","200","250"]')</pre>
+      </api_usage>
+      <api_param name="pa_str" type="DYNAMIC ARRAY OF STRING">Dynamic array of strings</api_param>
+      <api_param name="p_json" type="STRING">String with JSONarray</api_param>
+    </function>
+  </api_class>
+  <api_class name="wc_c3chart" package="webcomponents.api" top="../../" prev="str">
+    <TYPE name="tColumn" modifier="public" type="DYNAMIC ARRAY OF STRING"/>
+    <TYPE name="tColumns" modifier="public" type="DYNAMIC ARRAY WITH DIMENSION 2 OF STRING"/>
+    <TYPE name="tTypes" modifier="public" type="DICTIONARY OF STRING"/>
+    <TYPE name="tGroup" modifier="public" type="DYNAMIC ARRAY OF STRING"/>
+    <TYPE name="tGroups" modifier="public" type="DYNAMIC ARRAY WITH DIMENSION 2 OF STRING"/>
+    <TYPE name="tData" modifier="public" type="RECORD">
       <RECORD>
         <member name="x" type="STRING"/>
         <member name="xFormat" type="STRING"/>
@@ -21,47 +33,56 @@
         <member name="groups" type="wc_c3chart.tGroups" type_name="tGroups"/>
         <member name="onclick" type="STRING"/>
       </RECORD>
+      <function receiverType="tData" name="Set" modifier="public">
+        <api_synopsis> Set column of data from JSONArray string</api_synopsis>
+        <api_usage>
+          <pre> define r_data tData
+ call r_data.Set(1, '["alpha","100","180","240"]')</pre>
+        </api_usage>
+        <api_param name="p_idx" type="INTEGER"/>
+        <api_param name="p_json" type="STRING">JSON array of strings</api_param>
+      </function>
     </TYPE>
-    <TYPE name="tAxisType" type="RECORD &lt;anonymous wc_c3chart R3&gt;">
+    <TYPE name="tAxisType" modifier="public" type="RECORD">
       <RECORD>
         <member name="type" type="STRING"/>
         <member name="label" type="STRING"/>
         <member name="categories" type="DYNAMIC ARRAY OF STRING"/>
       </RECORD>
     </TYPE>
-    <TYPE name="tAxis" type="RECORD &lt;anonymous wc_c3chart R5&gt;">
+    <TYPE name="tAxis" modifier="public" type="RECORD">
       <RECORD>
         <member name="rotated" type="BOOLEAN"/>
         <member name="x" type="wc_c3chart.tAxisType" type_name="tAxisType"/>
         <member name="y" type="wc_c3chart.tAxisType" type_name="tAxisType"/>
       </RECORD>
     </TYPE>
-    <TYPE name="tGridLines" type="RECORD &lt;anonymous wc_c3chart R7&gt;">
+    <TYPE name="tGridLines" modifier="public" type="RECORD">
       <RECORD>
         <member name="show" type="BOOLEAN"/>
         <member name="lines" type="DYNAMIC ARRAY OF STRING"/>
       </RECORD>
     </TYPE>
-    <TYPE name="tGrid" type="RECORD &lt;anonymous wc_c3chart R9&gt;">
+    <TYPE name="tGrid" modifier="public" type="RECORD">
       <RECORD>
         <member name="x" type="wc_c3chart.tGridLines" type_name="tGridLines"/>
         <member name="y" type="wc_c3chart.tGridLines" type_name="tGridLines"/>
       </RECORD>
     </TYPE>
-    <TYPE name="tLegend" type="RECORD &lt;anonymous wc_c3chart R11&gt;">
+    <TYPE name="tLegend" modifier="public" type="RECORD">
       <RECORD>
         <member name="position" type="STRING"/>
         <member name="show" type="BOOLEAN"/>
       </RECORD>
     </TYPE>
-    <TYPE name="tTooltip" type="RECORD &lt;anonymous wc_c3chart R13&gt;">
+    <TYPE name="tTooltip" modifier="public" type="RECORD">
       <RECORD>
         <member name="show" type="BOOLEAN"/>
         <member name="grouped" type="BOOLEAN"/>
         <member name="format" type="STRING"/>
       </RECORD>
     </TYPE>
-    <TYPE name="tPadding" type="RECORD &lt;anonymous wc_c3chart R15&gt;">
+    <TYPE name="tPadding" modifier="public" type="RECORD">
       <RECORD>
         <member name="top" type="STRING"/>
         <member name="right" type="STRING"/>
@@ -69,12 +90,12 @@
         <member name="left" type="STRING"/>
       </RECORD>
     </TYPE>
-    <TYPE name="tColor" type="RECORD &lt;anonymous wc_c3chart R17&gt;">
+    <TYPE name="tColor" modifier="public" type="RECORD">
       <RECORD>
         <member name="pattern" type="DYNAMIC ARRAY OF STRING"/>
       </RECORD>
     </TYPE>
-    <TYPE name="tDoc" type="RECORD &lt;anonymous wc_c3chart R19&gt;">
+    <TYPE name="tDoc" modifier="public" type="RECORD">
       <RECORD>
         <member name="data" type="wc_c3chart.tData" type_name="tData"/>
         <member name="axis" type="wc_c3chart.tAxis" type_name="tAxis"/>
@@ -85,7 +106,7 @@
         <member name="color" type="wc_c3chart.tColor" type_name="tColor"/>
       </RECORD>
     </TYPE>
-    <TYPE name="tChart" type="RECORD &lt;anonymous wc_c3chart R21&gt;">
+    <TYPE name="tChart" modifier="public" type="RECORD">
       <RECORD>
         <member name="field" type="STRING"/>
         <member name="title" type="STRING"/>
@@ -93,8 +114,36 @@
         <member name="showfocus" type="BOOLEAN"/>
         <member name="doc" type="wc_c3chart.tDoc" type_name="tDoc"/>
       </RECORD>
+      <function receiverType="tChart" name="Set" modifier="public">
+        <api_synopsis> Set initial contents of widget</api_synopsis>
+        <api_usage>
+          <pre> define r_chart tChart
+ let r_chart.data.x = "x"
+ ...
+ call r_chart.Set()</pre>
+        </api_usage>
+      </function>
+      <function receiverType="tChart" name="Serialize" modifier="public">
+        <api_synopsis> Serialize a chart</api_synopsis>
+        <api_returnType>string</api_returnType>
+        <return>JSON string of tChart.doc structure</return>
+        <api_usage>
+          <pre> define r_chart wc_c3chart.tChart,
+   p_json string
+ let p_json = r_chart.Serialize()</pre>
+        </api_usage>
+        <RETURNS type="STRING"/>
+      </function>
+      <function receiverType="tChart" name="New" modifier="public">
+        <api_synopsis> Define a new instance of Chart</api_synopsis>
+        <api_usage>
+          <pre> define r_chart wc_c3chart.tChart
+ call r_chart.New("formonly.p_chart")</pre>
+        </api_usage>
+        <api_param name="p_field" type="STRING">Form name of the field</api_param>
+      </function>
     </TYPE>
-    <TYPE name="tElement" type="RECORD &lt;anonymous wc_c3chart R23&gt;">
+    <TYPE name="tElement" modifier="public" type="RECORD">
       <RECORD>
         <member name="x" type="STRING"/>
         <member name="value" type="STRING"/>
@@ -102,42 +151,25 @@
         <member name="index" type="STRING"/>
         <member name="name" type="STRING"/>
       </RECORD>
+      <function receiverType="tElement" name="Get" modifier="public">
+        <api_synopsis> DeSerialize a selected chart element from JSON string</api_synopsis>
+        <api_returnType>tElement</api_returnType>
+        <return>Element record</return>
+        <api_usage>
+          <pre> define r_element tElement, p_json string
+ call tElement.Get(p_json)</pre>
+        </api_usage>
+        <api_param name="p_json" type="STRING">JSON encoded element</api_param>
+      </function>
     </TYPE>
-    <VARIABLE name="m_trace" type="BOOLEAN"/>
-    <function name="Serialize">
-      <api_synopsis> Serialize a chart</api_synopsis>
-      <api_returnType>string</api_returnType>
-      <return>JSON string of tChart.doc structure</return>
+    <VARIABLE name="m_trace" modifier="public" type="BOOLEAN"/>
+    <function name="Init" modifier="public">
+      <api_synopsis> Initialize</api_synopsis>
       <api_usage>
-        <pre> define r_chart wc_c3chart.tChart,
-   p_json string
- let p_json = wc_c3chart.Serialize(r_chart.*)</pre>
+        <pre> call wc_c3chart.Init()</pre>
       </api_usage>
-      <api_param name="r_chart" type="wc_c3chart.tChart" type_name="tChart">tChart</api_param>
-      <RETURNS type="STRING"/>
     </function>
-    <function name="Element">
-      <api_synopsis> DeSerialize a selected chart element</api_synopsis>
-      <api_returnType>tElement</api_returnType>
-      <return>Element record</return>
-      <api_usage>
-        <pre> define r_element tElement, p_json string
- call wc_c3chart.Element(p_json) returning r_element</pre>
-      </api_usage>
-      <api_param name="p_json" type="STRING">JSON encoded element</api_param>
-      <RETURNS type="wc_c3chart.tElement" type_name="tElement"/>
-    </function>
-    <function name="Set">
-      <api_synopsis> Set initial contents of widget</api_synopsis>
-      <api_usage>
-        <pre> define r_chart tChart
- let r_chart.data.x = "x"
- ...
- call wc_c3chart.Set(r_chart.*)</pre>
-      </api_usage>
-      <api_param name="r_chart" type="wc_c3chart.tChart" type_name="tChart">Chart instance</api_param>
-    </function>
-    <function name="Domain">
+    <function name="Domain" modifier="public">
       <api_synopsis> Returns list of possible values in a domain</api_synopsis>
       <api_usage>
         <pre> define a_list dynamic array of string
@@ -145,32 +177,6 @@
       </api_usage>
       <api_param name="p_domain" type="STRING">Domain to return possible values of</api_param>
       <RETURNS type="DYNAMIC ARRAY OF STRING"/>
-    </function>
-    <function name="Column_Set">
-      <api_synopsis> Set tColumn of data from JSONArray string</api_synopsis>
-      <api_usage>
-        <pre> define p_json string, o_col tColumn
- call wc_color.Column_Set('["alpha","100","180","240"]') returning o_col</pre>
-      </api_usage>
-      <api_param name="p_json" type="STRING">JSON array of strings</api_param>
-      <RETURNS type="wc_c3chart.tColumn" type_name="tColumn"/>
-    </function>
-    <function name="Create">
-      <api_synopsis> Creates a new instance of Chart</api_synopsis>
-      <api_returnType>tChart</api_returnType>
-      <return>Chart record</return>
-      <api_usage>
-        <pre> define r_acc wc_c3chart.tChart
- call wc_c3chart.Create("formonly.p_chart") returning r_chart.*</pre>
-      </api_usage>
-      <api_param name="p_field" type="STRING">Form name of the field</api_param>
-      <RETURNS type="wc_c3chart.tChart" type_name="tChart"/>
-    </function>
-    <function name="Init">
-      <api_synopsis> Initialize</api_synopsis>
-      <api_usage>
-        <pre> call wc_c3chart.Init()</pre>
-      </api_usage>
     </function>
   </api_class>
 </package>

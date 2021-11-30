@@ -37,7 +37,8 @@
 #
 #############################################################################
 
-import fgl str
+--% package Common
+import FGL str
 import FGL OM_
 
 
@@ -1116,17 +1117,17 @@ private function xpath_Expr(p_prefix string, p_class string, p_name string)
   case
   when p_name matches "*=*"
     ### attrib='value' override ###
-    let p_expr = "@", p_name.Trim()
+    let p_expr = "@", p_name.trim()
   when (p_class matches "FormField*" or p_class matches "TableColumn*")
     and p_name not matches "*.*"
     ### columnName only ###
-    let p_expr = "@colName='", p_name.Trim(), "'"
+    let p_expr = "@colName='", p_name.trim(), "'"
   otherwise
     ### table.columnName ###
-    let p_expr = "@name='", p_name.Trim(), "'"
+    let p_expr = "@name='", p_name.trim(), "'"
   end case
 
-  let p_xpath = p_prefix, p_class.Trim(), "[", p_expr, "]", p_subClass
+  let p_xpath = p_prefix, p_class.trim(), "[", p_expr, "]", p_subClass
 
   return p_xpath
 

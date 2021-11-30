@@ -2,6 +2,8 @@
 # std.4gl   Standard definitions
 #
 
+--% package Common
+
 public type
   tValidationStatus
     record

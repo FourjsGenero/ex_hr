@@ -19,7 +19,7 @@ main
     exit program(1)
   end if
   
-  call Run(ARG_VAL(1))
+  call Run(arg_val(1))
   
 end main
 
@@ -42,7 +42,7 @@ public function Run(p_request)
         before menu
           -- show option "Test1"
         command "Employee"
-          call Emp_Con.Show()
+          call Emp_Con.Show("")
         -- command "Test1"
         command key('q')
           exit menu
@@ -54,7 +54,7 @@ public function Run(p_request)
     
     otherwise
       --% close window screen
-      call Emp_Con.Show()
+      call Emp_Con.Show(iif(arg_val(1) matches "-R*", arg_val(1), ""))
 
   end case
 

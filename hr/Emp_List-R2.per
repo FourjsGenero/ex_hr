@@ -1,0 +1,28 @@
+schema hr
+
+layout(text=%"Employees")
+  grid ctn_main
+  {
+    [s1                   ]
+   <T t1                    >
+    [f0  |f1   |f2   |f3  ] 
+  }
+  end --grid
+end --layout
+
+attributes
+  buttonedit s1 = formonly.l_search, completer, image="fa-cog",
+    placeholder=%"Search", comment=%"Search", action=b_search ;
+    
+  table t1 : t1 FLIPPED@SMALL, STRETCHCOLUMNS,
+    doubleclick=accept, style="normal";
+  f0 = formonly.employee_no, title=%"No", SCROLL;
+  f1 = formonly.surname, title=%"Surname", SCROLL;
+  f2 = formonly.firstname, title=%"First Name", SCROLL;
+  f3 = formonly._position, title=%"Position", SCROLL;
+
+end --attributes
+
+instructions
+  screen record emp_list(employee_no thru _position);
+end --instructions

@@ -1,0 +1,45 @@
+schema hr
+
+layout (text=%"Sick")
+  grid
+  {
+  <G g1                                                                     > 
+   <T t1                                                                   >
+   [p01           |p02           |p03  |p04                           |p05]
+   
+  <G g2                            >
+   <T t2                          >
+   [c01           |c02   |c03    ]
+                         [f06    ]
+  }
+  end --grid
+end --layout
+
+tables
+  sick, sickleave
+end --tables
+
+attributes
+  group g1 : text=%"Leave";
+  table t1 : t1 FLIPPED@SMALL;
+  phantom sick.employee_no;
+  dateedit p01 = sick.start_date, title=%"Start Date";
+  dateedit p02 = sick.end_date, title=%"End Date";
+  edit p03 = sick.days, title=%"Days", format="#&.&&";
+  edit p04 = sick.reason, title=%"Reason", STRETCH=X, SCROLL;
+  checkbox p05 = sick.medical, title=%"MC?", valuechecked="Y", valueunchecked="N";
+
+  group g2 : text=%"Accruals";
+  table t2 : t2 FLIPPED@SMALL;
+  phantom sickleave.employee_no;
+  dateedit c01 = sickleave.sick_date, title=%"Date";
+  c02 = sickleave.sick_adjustment, title=%"Adjustment", format="##&.&&";
+  c03 = sickleave.sick_runningbalance, title=%"Balance", format="##&.&&";
+  aggregate f06 = formonly.sick_balance, aggregateType=PROGRAM, aggregateText=%"Balance:";
+end --attributes
+
+
+instructions
+  screen record sick_scr(sick.employee_no thru sick.medical);
+  screen record sickleave_scr(sickleave.employee_no thru sick_runningbalance);
+end --instructions

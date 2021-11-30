@@ -1,0 +1,46 @@
+schema hr
+
+layout (text="Pay")
+  grid
+  {
+  <G g0                        >
+    [l01|f01       ]*
+    [l02|f02                 ]*
+    [l03|f03                 ]*
+    [l04|f04       ]*    [f05]
+
+  <G g1                        > 
+   <T t1                      >
+   [p01           |p02       ]
+  }
+  end --grid
+end --layout
+
+tables
+  paysummary
+end --tables
+
+attributes
+  group g0 : text="Payroll";
+  label l01 : label01, text=%"Start Date";
+  dateedit f01 = formonly.startdate;
+  label l02 : label02, text=%"Position";
+  f02 = formonly.position, SCROLL, STRETCH=X;
+  label l03 : label03, text=%"Tax Number";
+  f03 = formonly.taxnumber, SCROLL;
+  label l04 : label04, text=%"Salary/Wage";
+  f04 = formonly.base, format="#,###,##&";
+  f05 = formonly.basetype, noentry;
+
+  group g1 : text="Salary Reviews";
+  table t1 : t1 FLIPPED@SMALL;
+  phantom paysummary.employee_no;
+  dateedit p01 = paysummary.pay_date, title="Date";
+  p02 = paysummary.pay_amount, title="Salary", format="#,###,##&";
+end --attributes
+
+
+instructions
+  screen record emp_dtl(startdate thru basetype);
+  screen record pay_scr(paysummary.employee_no thru paysummary.pay_amount);
+end --instructions

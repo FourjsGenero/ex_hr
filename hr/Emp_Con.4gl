@@ -5,6 +5,7 @@ import FGL UI_
 import FGL Selection
 import FGL Employee
 import FGL wc_c3chart
+import fgl fgldialog
 
 schema hr
 
@@ -35,8 +36,10 @@ private define
     dash2 wc_c3chart.tChart,
     photo string,
     detail_edit string,
-    map string
-  end record
+    map string,
+    opt string  --%R1: responsive options
+  end record,
+  m_vpShow boolean = true --%R1: show current viewport size
 
 
 
@@ -59,9 +62,9 @@ public function Init(r_view Employee.tView inout)
   
   -- Set decorations
   -- call fgl_setTitle("Employees")
-  call ui.interface.loadStyles("hr2") --% hr1 std, hr2: folder.accordion, collapse group, chrome toolbar
-  call ui.interface.loadActionDefaults("hr1")
-  call ui.interface.loadToolBar("opt1")  --%was "opt"
+  call ui.Interface.loadStyles("hr2") --% hr1 std, hr2: folder.accordion, collapse group, chrome toolbar
+  call ui.Interface.loadActionDefaults("hr1")
+  call ui.Interface.loadToolBar("opt1")  --%was "opt"
   
   -- Setup for Employee module
   call Employee.Init()
@@ -85,7 +88,7 @@ public function Init(r_view Employee.tView inout)
   let mr_data.dash2.doc.axis.x.label = "Period"
   let mr_data.dash2.doc.axis.y.label = "Sales"
   call chart_Load(mr_data.dash2, "DASH2")
-  end function
+end function
 
 
 
@@ -98,7 +101,7 @@ public function Init(r_view Employee.tView inout)
 #+ call Emp_View.Show()
 #
 #############################################################################
-public function Show()
+public function Show(p_opt string)
 
   #%%% LIMITATION: For when we can pass params to sub dialogs
   # define
@@ -106,7 +109,9 @@ public function Show()
   define
     l_status string
 
-
+  --%R1: Set responsive option
+  let mr_data.opt = p_opt
+  
   -- Local setup with current view
   call Init(r_view)
 
@@ -114,7 +119,7 @@ public function Show()
   call r_view.list.selection.Refresh()
 
   -- Open and display Employee form
-  open form f_employee from "Employee"
+  open form f_employee from sfmt("Employee%1", p_opt)
   display form f_employee
 
   -- Initialize lookups
@@ -124,7 +129,7 @@ public function Show()
   call UI_.Node_Set(NULL, "Label", "text='*'", "color", "red")
 
 
-  --% KLUDGE: we need to set current Selection.tQuery because we can't pass args in dialog
+  --% KLUDGE: we need to set current Selection.tQuery because we can't pass args in dialog (yet)
   call r_view.list.selection.Current()
 
   dialog attributes(unbuffered)
@@ -157,18 +162,21 @@ public function Show()
         next field emp_hdr.firstname
       end if 
 
+      -- deactivate record indicator
+      call dialog.setActionActive("record", 0)
 
     -- Setup brackground monitoring of touched fields
-    {%OPT
+    {%OPT}
     on idle 1
       call document_Touched(dialog, NULL)
-    }
       
     #
     # Common actions to all sub-dialogs
     #
 
     -- Navigation
+    on action record
+    
     on action first
       if dialog.getCurrentRow(k_screenList) > 1
       then
@@ -190,10 +198,6 @@ public function Show()
     on action last
       if dialog.getCurrentRow(k_screenList) < r_view.list.selection.count
       then
-        {
-        call row_Set(dialog, UI_.Page_Row("NEXT", dialog.getCurrentRow(k_screenList),
-          fgl_dialog_getBufferLength(), Selection.rCurrent.count))
-        }
         call row_Set(dialog, r_view.list.selection.count)
       end if
       
@@ -219,16 +223,24 @@ public function Show()
         error l_status
       end if
 
+    --%R1:{ helpful feedback for resizing: info toggles on/off, windowresized shows viewport size
+    on action info
+      #let m_vpShow = not m_vpShow
+      #message "Viewport.Show: " || iif(m_vpShow, "ON", "OFF")
+      call viewport_Show()
+
+    #on action windowresized
+    #  call viewport_Show()
+    #--%R1:}
+      
     on action cancel
       message "Cancel"
       call confirm_Cancel(dialog)
 
-
-    -- Get out of here
     on action close
       call confirm_Save(dialog)
       exit dialog
-      
+
   end dialog
   
 end function
@@ -308,7 +320,7 @@ private dialog list_Browse({r_view Employee.tView inout})
       call r_view.list.selection.Refresh()
 
     on fill buffer
-      let l_count = r_view.list.Load(fgl_dialog_getBufferStart(), fgl_dialog_getBufferLength())
+      let l_count = r_view.list.Load(fgl_dialog_getbufferstart(), fgl_dialog_getbufferlength())
 
     on action accept
       -- First field of Document page
@@ -335,10 +347,12 @@ private dialog employee_Edit()
     l_error string,
     field_name string
 
-  input r_view.doc.employee.*, mr_data.photo, mr_data.map
-    from emp_hdr.*, emp_dtl.*, sick_balance, annual_balance, photo, map
+  input r_view.doc.employee.*, mr_data.photo, mr_data.map, 
+      mr_data.photo --%R1:mirror
+    from emp_hdr.*, emp_dtl.*, sick_balance, annual_balance, photo, map, 
+      photox --%R1:mirror
     attributes(without defaults=true)
-
+    
     on change firstname, middlenames, surname, preferredname, title_id,
       birthdate, gender, address1, address2, address3, address4,
       country_id, postcode, phone, mobile, email, startdate, position,
@@ -599,9 +613,6 @@ end dialog
 #+ call row_Set(dialog) 
 #
 private function row_Set(po_dialog ui.Dialog, p_row INTEGER)
-
-  define
-    l_row integer
     
   call confirm_Save(po_dialog)
   --% let l_row = po_dialog.visualToArrayIndex(k_screenList, p_row)
@@ -642,7 +653,7 @@ private function view_Refresh(po_dialog ui.Dialog)
   call r_view.list.selection.Filter(po_dialog.getFieldValue(r_view.list.selection.field))
   call r_view.list.selection.Refresh()
   call po_dialog.setArrayLength(k_screenList, r_view.list.selection.count)
-  let l_count = r_view.list.Load(fgl_dialog_getBufferStart(), fgl_dialog_getBufferLength())
+  let l_count = r_view.list.Load(fgl_dialog_getbufferstart(), fgl_dialog_getbufferlength())
   call record_Status(po_dialog)
 
   -- Refresh data for current row
@@ -665,8 +676,8 @@ end function
 
 private function record_Status(po_control ui.Dialog)
 
-  message sfmt("Record %1 of %2", po_control.getCurrentRow(k_screenList),
-    po_control.getArrayLength(k_screenList))
+  call po_control.setActionText("record", sfmt("%1 of %2", po_control.getCurrentRow(k_screenList),
+    po_control.getArrayLength(k_screenList)))
 
 end function
 
@@ -686,7 +697,7 @@ private function confirm_Cancel(po_dialog ui.Dialog)
 
   if UI_.Fields_Touched(po_dialog, ma_fields, NULL)
   then
-    if fgl_WinQuestion("Discard Changes?",
+    if fgldialog.fgl_winQuestion("Discard Changes?",
       "The current document has been modified.\nDo you wish to discard these changes?",
       "yes",
       "no|yes",
@@ -726,7 +737,7 @@ private function confirm_Delete(po_dialog ui.Dialog)
 
 
   --% let l_deleted = FALSE
-  if fgl_WinQuestion("Delete Employee?",
+  if fgldialog.fgl_winQuestion("Delete Employee?",
     "Do you wish to Delete this employee and all related data?",
     "yes",
     "no|yes",
@@ -769,7 +780,7 @@ private function confirm_Save(po_dialog ui.Dialog)
 
   if UI_.Fields_Touched(po_dialog, ma_fields, NULL)
   then
-    if fgl_WinQuestion("Unsaved Document",
+    if fgldialog.fgl_winQuestion("Unsaved Document",
       "The current document has been modified.\nDo you wish to Save this document?",
       "yes",
       "no|yes",
@@ -833,14 +844,19 @@ end function
 #
 
 private function data_Load(r_doc Employee.tDoc inout)
-
+    
   -- Load up chart data
-  --%%% call chart_Load(mr_data.dash1, "DASH1")
   call chart_Load(mr_data.dash1, "RANDOM")
-  call mr_data.dash1.Set()
-  --%%% call chart_Load(mr_data.dash2, "DASH2")
+  call mr_data.dash1.Set("")
   call chart_Load(mr_data.dash2, "RANDOM")
-  call mr_data.dash2.Set()
+  call mr_data.dash2.Set("")
+
+  --%R1:mirror dash{
+  if mr_data.opt matches "-R*"
+  then
+    call mr_data.dash1.Set("formonly.dash1x")
+    call mr_data.dash2.Set("formonly.dash2x")
+  end if --}
 
   -- photo --
   let mr_data.photo = downshift(r_doc.employee.gender) || ((r_doc.employee.employee_no mod 10) using "&&")
@@ -854,13 +870,16 @@ private function data_Load(r_doc Employee.tDoc inout)
   otherwise
     let mr_data.detail_edit = '<h2><span style="color:#0066cc">Experience</span></h2><h4><span style="color:#008a00">Position: Backup Vocals</span></h4><h5>Dates: 12jun12-Present</h5><p>Thunderbolt and lightning, very, very frightening, oh mama mia, mama mia, can anybody, find me, somebody to love</p><h4><span style="color:#008a00">Position: Bass Guitar</span></h4><h5>Dates 03apr12-18aug15</h5><p>Hello darkness my old friend, Ive come to talk to you again, because a vision softly creeping, left its seed while I was sleeping, and the visions that was planted in my brain, still remains, within the sounds of silence.</p><h2><span style="color:#0066cc">Education</span></h2><h4><span style="color:#008a00">Diploma in Grunge &#x2F; 24mar13</span></h4><h5><span style="color:#008a00">Music Conservatory</span></h5><p>There must be some kind of way out of here, said the joker to the theif, theres too much confusion, I cant get no relief.</p><h2><span style="color:#0066cc">Volunteer Experience or Leadership</span></h2><p>I see a red door and I want to paint it black, no colours anymore I want them to turn black. I see the girls go by dressed in their summer clothes, I have to turn my head until my darkness goes.<br/>  </p>'
   end case
-      -- Need to *embed* for some websites like Google maps
-      --% display "https://maps.google.com/maps?q=Paris&output=embed" to map
-      #% display "https://maps.google.com/maps?q=Paris" to map
-      --% display "https://www.openstreetmap.org/export/embed.html?bbox=7.7011263370513925%2C48.609369784200005%2C7.715288400650024%2C48.61584599949853&amp;layer=mapnik" to map
+  
+  -- Need to *embed* for some websites like Google maps:
+  --% https://maps.google.com/maps?q=Paris&output=embed
+  --% https://maps.google.com/maps?q=Paris
+  --% https://www.openstreetmap.org/export/embed.html?bbox=7.7011263370513925%2C48.609369784200005%2C7.715288400650024%2C48.61584599949853&amp;layer=mapnik
 
   -- %get location from employee and set map location
-  let mr_data.map = "https://maps.google.com/maps?q=Paris"
+  # a Google Cloud API Key is now required to use Google Maps
+  # let mr_data.map = "https://maps.google.com/maps/embed/v1/place?key={{API-KEY}}&q=Paris"
+  let mr_data.map = "https://www.openstreetmap.org/export/embed.html?bbox=7.7011263370513925%2C48.609369784200005%2C7.715288400650024%2C48.61584599949853&amp;layer=mapnik"
 
 end function
 
@@ -908,11 +927,25 @@ end function
 #
 private function data_Random(p_max integer)
 
-  return util.integer.abs(security.RandomGenerator.CreateRandomNumber() mod p_max)
+  return util.Integer.abs(security.RandomGenerator.CreateRandomNumber() mod p_max)
   
 end function
 
 
+#
+#! viewport_Show    Show the current screen's effective viewport size
+#
+
+private function viewport_Show()
+
+  if m_vpShow
+  then
+    var p_size string
+    call ui.Interface.frontCall("standard","feInfo",["windowSize"],[p_size])
+    message "Size = ", p_size
+  end if
+  
+end function
 
 
 
@@ -924,7 +957,7 @@ end function
 # UpShift_Labels
 #
 
-function UpShift_Labels()
+private function UpShift_Labels()
 
   define nl om.NodeList 
   define r, n om.DomNode 

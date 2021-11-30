@@ -198,15 +198,17 @@ end function
 #! tChart.Set
 #+ Set initial contents of widget
 #+
+#+ @param p_field    Field to set to, if null defaults to this.field
+#+
 #+ @code
 #+ define r_chart tChart
 #+ let r_chart.data.x = "x"
 #+ ...
-#+ call r_chart.Set()
+#+ call r_chart.Set("")
 #
-public function (this tChart) Set()
+public function (this tChart) Set(p_field string)
 
-  call ui.Interface.frontCall("webcomponent", "call", [this.field, "Set", this.Serialize()], [])
+  call ui.Interface.frontCall("webcomponent", "call", [nvl(p_field, this.field), "Set", this.Serialize()], [])
   
 end function
 

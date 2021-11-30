@@ -482,8 +482,8 @@ private function bestWidth(t)
   when "SMALLFLOAT" return 14
   when "FLOAT"   return 14
   when "STRING"  return 20
-  when "DECIMAL" return iif(len is null, 16, LEN + 2)
-  when "MONEY"   return iif(len is null, 16, LEN + 2)
+  when "DECIMAL" return iif(len is null, 16, len + 2)
+  when "MONEY"   return iif(len is null, 16, len + 2)
   when "CHAR"    return iif(len is null, 1, iif (len > 20, 20, len))
   when "VARCHAR" return iif(len is null, 1, iif (len > 20, 20, len))
   when "DATE"    return 10

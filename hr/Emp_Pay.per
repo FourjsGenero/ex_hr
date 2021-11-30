@@ -3,18 +3,15 @@ schema hr
 layout (text="Pay")
   grid
   {
-  <G g0                                            >
-    Start Date             [f01       ]*
-    Position               [f02                 ]*
-    Tax Number             [f03                 ]*
-    Salary/Wage            [f04       ]*    [f05]
+  <G g0                        >
+    [l01|f01       ]*
+    [l02|f02                 ]*
+    [l03|f03                 ]*
+    [l04|f04       ]*    [f05]
 
-  <G g1                    > 
-   <T t1                  >
-   [p01       ][p02       ]
-   [p01       ][p02       ]
-   [p01       ][p02       ]
-   [p01       ][p02       ]
+  <G g1                        > 
+   <T t1                      >
+   [p01           |p02       ]
   }
   end --grid
 end --layout
@@ -25,9 +22,13 @@ end --tables
 
 attributes
   group g0 : text="Payroll";
+  label l01 : label01, text=%"Start Date";
   dateedit f01 = formonly.startdate;
+  label l02 : label02, text=%"Position";
   f02 = formonly.position;
+  label l03 : label03, text=%"Tax Number";
   f03 = formonly.taxnumber;
+  label l04 : label04, text=%"Salary/Wage";
   f04 = formonly.base, format="#,###,##&";
   f05 = formonly.basetype, noentry;
 

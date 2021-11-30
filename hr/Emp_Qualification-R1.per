@@ -1,0 +1,25 @@
+schema hr
+
+layout (text=%"Qualification")
+  table (FLIPPED@SMALL)
+  {
+  [p01           |p02        |p04                                   ]
+  }
+  end --table
+end --layout
+
+tables
+  qualification
+end --tables
+
+attributes
+  phantom qualification.employee_no;
+  dateedit p01 = qualification.qual_date, title=%"Date";
+  combobox p02 = qualification.qual_id, title=%"Type", SCROLL;
+  edit p04 = qualification.narrative, title=%"Details", SCROLL, STRETCH=X;
+end --attributes
+
+
+instructions
+  screen record qualification_scr(qualification.employee_no thru qualification.narrative);
+end --instructions

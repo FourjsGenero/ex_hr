@@ -38,7 +38,11 @@ end main
 #! Run
 #
 public function Run(p_request string)
-    
+
+  case p_request
+    when "MENU"
+  end case
+
 end function
 
 

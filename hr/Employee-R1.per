@@ -1,0 +1,54 @@
+
+layout (text=%"Employees-R1", version="001")
+
+  folder
+  
+    page list (text=%"List", image="textlistbullet")
+      form "Emp_List-R1"
+    end --page:list
+    
+    page document (text=%"Document", image="file", action=pgDoc)
+      hbox contents (SPLIT@SMALL, SPLIT@MEDIUM)
+      
+        form "Emp_Hdr-R1"
+        
+        folder (style="accordion")
+
+          page review (text=%"Reviews", image="sum")
+            form "Emp_Review-R1"
+          end --page:review
+          
+          page qualification (text=%"Qualifications", image="fa-graduation-cap")
+            form "Emp_Qualification-R1"
+          end --page:qualification
+          
+          page pay (text=%"Pay", image="fa-dollar") 
+            form "Emp_Pay-R1"
+          end --page:pay
+          
+          page leave (text=%"Leave", image="fa-automobile")
+            form "Emp_Leave-R1"
+          end --page:leave
+
+          page sick (text=%"Medical", image="fa-ambulance")
+            form "Emp_Medical-R1"
+          end --page:sick
+
+          page travel (text=%"Travel", image="lingua")
+            form "Emp_Travel-R1"
+          end --page:travel
+          
+        end --folder
+
+        --%R1: Mirrored Photo and Dashboard active when @SMALL, so it appears in this HBox 
+        form "Emp_ExtPhoto-R1"
+        form "Emp_ExtDash1-R1"
+        form "Emp_ExtDash2-R1"
+        
+      end --hbox
+    end --page: document
+    
+  end --folder
+  
+end--layout
+

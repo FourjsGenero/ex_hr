@@ -26,6 +26,9 @@ Property of Four Js*
   <ActionDefault name="insert" text="" image="import" acceleratorName="F3" contextMenu="no"/>
   <ActionDefault name="append" text="" image="fa-angle-double-down" acceleratorName="Control-F3" contextMenu="no"/>
 
+  <ActionDefault name="info" text="" image="fa-question" contextMenu="no"/>
+  <ActionDefault name="windowresized" text="" defaultView="no" contextMenu="no"/>
+  
   <!-- Standard -->
   <ActionDefault name="accept" text="OK" acceleratorName="Return" acceleratorName2="Enter" contextMenu="no"/>
   <ActionDefault name="cancel" validate="no" text="Cancel" acceleratorName="Escape" contextMenu="no"/>

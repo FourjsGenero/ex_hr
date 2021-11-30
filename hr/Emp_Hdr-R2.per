@@ -1,0 +1,139 @@
+schema hr
+
+layout (text=%"Employees")
+  vbox (ORIENTATION@MEDIUM=HORIZONTAL)
+
+    vbox
+    
+      grid
+      {
+       [l01][f01   :   ]
+      }
+      end --grid
+
+      hbox (ORIENTATION@MEDIUM=VERTICAL)
+      
+        vbox
+        
+          group (text=%"Name")
+            grid
+            {
+             [l02][f02       ]*
+             [l03][f03       ]
+             [l04][f04       ]*
+             [l05][f05       ]
+             [l06][f06    :  ]*
+            }
+            end --grid
+          end --group
+
+          group (text=%"Personal Details")
+            grid
+            {
+             [l07][f07       ]*         
+             [l08][x         ]*
+            }
+            end --grid
+          end --group 
+          
+        end --vbox
+        
+        grid
+        {
+         [p21                ]
+        }
+        end --grid  
+        
+      end --hbox
+      
+      group (text=%"Contact Details")
+        grid
+        {
+         [l11][f11           ]*
+              [f12           ]
+              [f13           ]
+              [f14           ]
+         [l15][f15           ]*  
+         [l16][f16   :       ]
+         [l17][f17           ]*
+         [l18][f18           ]*
+         [l19][f19           ]
+        } 
+        end --grid
+      end --group
+      
+    end --vbox
+    
+    group (text=%"Dashboard", HIDDEN@SMALL)
+      hbox (ORIENTATION@MEDIUM=VERTICAL)
+      
+        grid
+        {
+        [p31                             ]
+        }
+        end --grid
+        
+        grid
+        {
+        [p32                             ]
+        }
+        end --grid
+        
+      end --hbox
+    end --group
+    
+  end --vbox
+end --layout
+
+tables
+  employee
+end --tables
+  
+attributes
+  label l01 : label01, text=%"Employee Number";
+  f01 = employee.employee_no, SCROLL;
+
+  label l02 : label02, text=%"First";
+  f02 = employee.firstname, SCROLL, STRETCH=X;
+  label l03 : label03, text=%"Middle";
+  f03 = employee.middlenames, SCROLL;
+  label l04 : label04, text=%"Surname";
+  f04 = employee.surname, SCROLL;
+  label l05 : label05, text=%"Preferred";
+  f05 = employee.preferredname, SCROLL;
+  label l06 : label06, text=%"Title";
+  combobox f06 = employee.title_id, not null, SCROLL;
+
+  label l07 : label07, text=%"Birth Date";
+  dateedit f07 = employee.birthdate;
+  label l08 : label08, text=%"Gender";
+  radiogroup x = employee.gender, not null, 
+    items=(("M","Male"),("F","Female")), orientation=horizontal;
+
+  label l11 : label11, text=%"Address";
+  f11 = employee.address1, SCROLL, STRETCH=X;
+  f12 = employee.address2, SCROLL;
+  f13 = employee.address3, SCROLL;
+  f14 = employee.address4, SCROLL;
+  label l15 : label15, text=%"Country";
+  combobox f15 = employee.country_id, not null, SCROLL;
+  label l16 : label16, text=%"Postcode";
+  f16 = employee.postcode, SCROLL;
+
+  label l17 : label17, text=%"Phone";
+  f17 = employee.phone, SCROLL;
+  label l18 : label18, text=%"Mobile";
+  f18 = employee.mobile, SCROLL;
+  label l19 : label19, text=%"Email";
+  f19 = employee.email, SCROLL;
+
+  image p21 = formonly.photo, stretch=both, autoscale, HIDDEN@SMALL;
+
+  webcomponent p31 = formonly.dash1, componenttype="wc_c3chart", scrollbars=none, stretch=both;
+  webcomponent p32 = formonly.dash2, componenttype="wc_c3chart", scrollbars=none, stretch=both;
+end --attributes
+
+instructions
+  screen record emp_hdr(employee_no thru email);
+  screen record emp_pic(formonly.photo);
+end --intructions

@@ -1,9 +1,8 @@
 #
-# Com_Test.4gl  Unit tests for Com module
+# Dom_Test.4gl  Unit tests for Dom module
 #
 
-import FGL db
-import fgl str
+import FGL OM_
 
 
 
@@ -24,7 +23,11 @@ end main
 #! Run
 #
 public function Run(p_request string)
-    
+
+  case p_request
+    when "MENU"
+  end case
+
 end function
 
 

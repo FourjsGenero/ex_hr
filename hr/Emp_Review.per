@@ -1,20 +1,18 @@
 schema hr
 
-layout (text="Reviews")
-  grid
-  {
-  <G g1                                                               > 
-   <T t1                                                             >
-   [p01       ][p04                                                  ]
-   [p01       ][p04                                                  ]
-   [p01       ][p04                                                  ]
-   [p01       ][p04                                                  ]
-  [wc01                                                               ]
-  [                                                                   ]
-  [                                                                   ]
-  [                                                                   ]
-  }
-  end --grid
+layout (text=%"Reviews")
+  vbox (splitter)
+    table
+    {
+    [p01           |p04                                            ]
+    }
+    end --table
+    grid
+    {
+    [wc01                                                          ]
+    }
+    end --grid
+  end --vbox
 end --layout
 
 tables
@@ -22,9 +20,8 @@ tables
 end --tables
 
 attributes
-  group g1 : text="Reviews";
   phantom review.employee_no;
-  dateedit p01 = review.review_date, title="Review Date";
+  dateedit p01 = review.review_date, title="Date";
   edit p04 = review.summary, title="Reason";
   phantom review.detail;
   webcomponent wc01 = formonly.detail_edit, componenttype="fglrichtext", scrollbars=both, stretch=both,

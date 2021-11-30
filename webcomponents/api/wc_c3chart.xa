@@ -1,5 +1,5 @@
-<?xml version='1.0' encoding='ASCII'?>
-<api_class name="wc_c3chart" package="api" top="../" prev="str">
+<?xml version='1.0' encoding='UTF-8'?>
+<api_class name="wc_c3chart" package="webcomponents.api" top="../../" prev="str">
   <TYPE name="tColumn" modifier="public" type="DYNAMIC ARRAY OF STRING"/>
   <TYPE name="tColumns" modifier="public" type="DYNAMIC ARRAY WITH DIMENSION 2 OF STRING"/>
   <TYPE name="tTypes" modifier="public" type="DICTIONARY OF STRING"/>

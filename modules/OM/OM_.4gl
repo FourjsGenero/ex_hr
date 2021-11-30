@@ -58,7 +58,7 @@ public function Element_AttributeGet(p_elementID integer, p_attrib string)
 
   call init()
 
-  let d_node = md_doc.getElementByID(p_elementID)
+  let d_node = md_doc.getElementById(p_elementID)
   return d_node.getAttribute(p_attrib)
 
 end function
@@ -89,7 +89,7 @@ public function Element_AttribSet(p_elementID integer, p_attrib string, p_value 
 
   call init()
 
-  let d_node = md_doc.getElementByID(p_elementID)
+  let d_node = md_doc.getElementById(p_elementID)
   call d_node.setAttribute(p_attrib, p_value)
 
 end function
@@ -124,10 +124,10 @@ public function Element_Create(p_parentID integer, p_tagName string)
 
   call init()
 
-  let d_parent = md_doc.getElementByID(p_parentID)
+  let d_parent = md_doc.getElementById(p_parentID)
   let d_child = d_parent.createChild(p_tagName)
 
-  return d_child.getID()
+  return d_child.getId()
 
 end function
 
@@ -155,7 +155,7 @@ public function Element_Delete(p_parentID integer)
 
   call init()
 
-  let d_parent = md_doc.getElementByID(p_parentID)
+  let d_parent = md_doc.getElementById(p_parentID)
   call md_doc.removeElement(d_parent)
 
 end function
@@ -361,7 +361,7 @@ public function Node_Find(d_parent om.DomNode, p_tag string, p_attrib string, p_
       return d_child
     end if
 
-    let d_parent = d_parent.GetNext()
+    let d_parent = d_parent.getNext()
   end while
 
   return NULL

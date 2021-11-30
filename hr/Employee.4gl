@@ -3,7 +3,7 @@
 #
 
 import FGL db
-import fgl str
+import FGL str
 import FGL Selection
 
 schema hr
@@ -172,13 +172,13 @@ public function Init()
   #%%% call this.list.init()
 
   -- Dictionary of Validation functions
-  let ma_valid["firstname"] = function Valid_Firstname
+  let ma_valid["firstname"] = function Valid_FirstName
   let ma_valid["surname"] = function Valid_Surname
   let ma_valid["title_id"] = function Valid_Title_ID
   let ma_valid["birthdate"] = function Valid_Birthdate
   let ma_valid["gender"] = function Valid_Gender
   let ma_valid["address1"] = function Valid_Address1
-  let ma_valid["postcode"] = function Valid_Postcode
+  let ma_valid["postcode"] = function Valid_PostCode
   let ma_valid["country_id"] = function Valid_Country_ID
   let ma_valid["phone"] = function Valid_Phone
   let ma_valid["mobile"] = function Valid_Mobile
@@ -286,7 +286,7 @@ public function (this tList) Load(p_start int, p_len int) returns integer
     call this.selection.cursor.fetchAbsolute(l_row)
 
     -- Exit if no more rows
-    if SQLCA.SQLcode
+    if sqlca.sqlcode
     then
       return l_row-1
     end if
@@ -328,7 +328,7 @@ public function (this tList) Key(p_row integer) returns like employee.employee_n
     
   #% fetch absolute p_row c_empLine into r_line.*
   call this.selection.cursor.fetchAbsolute(p_row)
-  if SQLCA.SQLcode
+  if sqlca.sqlcode
   then
     return NULL
   end if
@@ -425,7 +425,7 @@ public function (this tDoc) Get(p_employeeNo like employee.employee_no)
 
   -- Pay Summary
   let i = 0
-  foreach c_paysummary using p_employeeNo into r_pay.*
+  foreach c_paySummary using p_employeeNo into r_pay.*
     let this.pay[i:=i+1].* = r_pay.*
   end foreach
   
@@ -449,8 +449,8 @@ public function (this tDoc) Get(p_employeeNo like employee.employee_no)
   
   -- Sick Leave
   let i = 0
-  foreach c_sickleave using p_employeeNo into r_sickleave.*
-    let this.sickleave[i:=i+1].* = r_sickleave.*
+  foreach c_sickLeave using p_employeeNo into r_sickLeave.*
+    let this.sickleave[i:=i+1].* = r_sickLeave.*
   end foreach
   
   -- Leave
@@ -461,7 +461,7 @@ public function (this tDoc) Get(p_employeeNo like employee.employee_no)
   
   -- Annual Leave
   let i = 0
-  foreach c_annualleave using p_employeeNo into r_annual.*
+  foreach c_annualLeave using p_employeeNo into r_annual.*
     let this.annual[i:=i+1].* = r_annual.*
   end foreach
 
@@ -544,7 +544,7 @@ public function (this tDoc) Delete() returns string
       delete from employee
       where employee_no = this.employee.employee_no
     catch
-      let l_status = "ERROR: " || SQLCA.SQLERRM
+      let l_status = "ERROR: " || sqlca.sqlerrm
     end try
   end if
 
@@ -592,7 +592,7 @@ public function (this tDoc) Insert() returns string
   try
     insert into employee values (this.employee.*)
   catch
-    let l_status = "ERROR: " || SQLCA.SQLERRM
+    let l_status = "ERROR: " || sqlca.sqlerrm
   end try
 
   if l_status = "OK"
@@ -647,7 +647,7 @@ public function (this tDoc) Update() returns string
       employee.* = this.employee.*
     where employee_no = this.employee.employee_no
   catch
-    let l_status = "ERROR: " || SQLCA.SQLERRM
+    let l_status = "ERROR: " || sqlca.sqlerrm
   end try
 
   if l_status = "OK"
@@ -824,7 +824,12 @@ function Valid_Address1(this tDoc inout) returns (boolean, string)
 end function
 
 function Valid_PostCode(this tDoc inout) returns (boolean, string)
-  return TRUE, ""
+  if length(this.employee.postcode) < 3
+  then
+    return false, "Postcode is too short"
+  else
+    return TRUE, ""
+  end if
 end function
 
 function Valid_Country_ID(this tDoc inout) returns (boolean, string)
@@ -860,8 +865,8 @@ function PhoneNumber_Valid(p_phone string)
   if p_phone matches "+*"
   then
     let p_phone = p_phone.subString(2,p_phone.getLength())
-  end if
-  
+  end IF
+
   return str.HasOnly("[0-9 ]", p_phone)
 end function
 
@@ -942,7 +947,7 @@ function (this tDoc) Valid_Record() returns (boolean, string, string)
   end for
 
   -- Other rules
-  if not Postcode_In_Country_Valid(this.employee.postcode, this.employee.country_id)
+  if not PostCode_In_Country_Valid(this.employee.postcode, this.employee.country_id)
   then
       return FALSE, "Postcode must be valid for country", "postcode"
   end if
@@ -961,7 +966,7 @@ function PostCode_In_Country_Valid(p_postcode string, p_countryid string) return
 
   -- get country record
   call country_Get(p_countryid)
-    returning r_country.*
+    returning r_country
 
   -- Verify postcode is correct length for country
   if l_postcode.getLength() != r_country.postcode_length
@@ -1080,7 +1085,7 @@ private function (this tDoc) detail_Upsert(p_mode string)
     end if
     
   catch
-    return "ERROR: " || SQLCA.SQLERRM
+    return "ERROR: " || sqlca.sqlerrm
   end try
 
   return "OK"
@@ -1135,6 +1140,6 @@ private function country_Get(p_countryid like country.country_id) returns record
   foreach c_country using p_countryid into r_country.*
   end foreach
 
-  return r_country.*
+  return r_country
   
 end function    

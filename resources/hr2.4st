@@ -16,6 +16,10 @@ Property of Four Js*
   <Style name="Window">
      <StyleAttribute name="windowType" value="normal" />
   </Style>
+
+  <Style name="Folder.lateRendering">
+    <StyleAttribute name="lateRendering" value="yes" />
+  </Style>
   
   <Style name="Folder.accordion">
     <StyleAttribute name="position" value="accordion" />

@@ -1,0 +1,30 @@
+layout
+
+  vbox
+
+    grid (HIDDEN@MEDIUM, HIDDEN@LARGE)
+      {
+      SMALL [f1              ]
+      }
+    end --grid
+
+    grid (HIDDEN@SMALL, HIDDEN@LARGE)
+      {
+      MEDIUM [f2              ]
+      }
+    end --grid
+    
+    grid (HIDDEN@SMALL, HIDDEN@MEDIUM)
+      {
+      LARGE [f3              ]
+      }
+    end --grid
+    
+  end --vbox
+end --layout
+
+attributes
+
+edit f1 = formonly.f1;
+edit f2 = formonly.f2;
+edit f3 = formonly.f3;

@@ -1,0 +1,35 @@
+schema hr
+
+layout (text=%"Travel")
+  vbox (splitter)
+    table (FLIPPED@SMALL)
+    {
+    [p01           |p02           |p03  |p04                           |p05]
+    }
+    end --table
+    grid
+    {
+    [wc01                                                                  ]
+    }
+    end --grid
+  end --vbox
+end --layout
+
+tables
+  travel
+end --tables
+
+attributes
+  phantom travel.employee_no;
+  dateedit p01 = travel.start_date, title=%"Start Date";
+  dateedit p02 = travel.end_date, title=%"End Date";
+  edit p03 = travel.days, title=%"Days", format="#&.&&";
+  edit p04 = travel.reason, title=%"Reason", STRETCH=X, SCROLL;
+  checkbox p05 = travel.approved, title=%"Approved", valuechecked="Y", valueunchecked="N";
+  webcomponent wc01 = formonly.map, stretch=both;
+end --attributes
+
+
+instructions
+  screen record travel_scr(travel.employee_no thru travel.approved);
+end --instructions

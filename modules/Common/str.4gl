@@ -19,6 +19,8 @@
 # TBD
 #! _        Localisation of Strings
 
+--% package Common
+
 import security
 import util
 

@@ -1,20 +1,18 @@
 schema hr
 
-layout (text="Travel")
-  grid
-  {
-  <G g1                                                                > 
-   <T t1                                                              >
-   [p01       ][p02       ][p03  ][p04                           ][p05]
-   [p01       ][p02       ][p03  ][p04                           ][p05]
-   [p01       ][p02       ][p03  ][p04                           ][p05]
-   [p01       ][p02       ][p03  ][p04                           ][p05]
-  [wc01                                                                ]
-  [                                                                    ]
-  [                                                                    ]
-  [                                                                    ]
-  }
-  end --grid
+layout (text=%"Travel")
+  vbox (splitter)
+    table
+    {
+      [p01           |p02           |p03  |p04                           |p05]
+    }
+    end --table
+    grid
+    {
+      [wc01                                                                  ]
+    }
+    end --grid
+  end --vbox
 end --layout
 
 tables
@@ -22,13 +20,12 @@ tables
 end --tables
 
 attributes
-  group g1 : text="Travel";
   phantom travel.employee_no;
-  dateedit p01 = travel.start_date, title="Start Date";
-  dateedit p02 = travel.end_date, title="End Date";
-  edit p03 = travel.days, title="Days", format="#&.&&";
-  edit p04 = travel.reason, title="Reason";
-  checkbox p05 = travel.approved, title="Approved", valuechecked="Y", valueunchecked="N";
+  dateedit p01 = travel.start_date, title=%"Start Date";
+  dateedit p02 = travel.end_date, title=%"End Date";
+  edit p03 = travel.days, title=%"Days", format="#&.&&";
+  edit p04 = travel.reason, title=%"Reason";
+  checkbox p05 = travel.approved, title=%"Approved", valuechecked="Y", valueunchecked="N";
   webcomponent wc01 = formonly.map, stretch=both;
 end --attributes
 

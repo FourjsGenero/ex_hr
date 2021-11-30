@@ -1,36 +1,88 @@
 schema hr
 
-layout (text="Employees")
-  grid
-  {
-   Employee Number [f01     ]                       
-  <G gname                                         > [p21                ]
-   First Name      [f02                          ]*  [                   ]
-   Middle Name(s)  [f03                          ]   [                   ]
-   Surname         [f04                          ]*  [                   ]
-   Preferred Name  [f05                          ]   [                   ]
-   Title           [f06       ]*                     [                   ]
-  <                                                > [                   ]
-  <G gpersonal                                                            >
-   Birth Date      [f07       ]*         Gender          [x]*
-  <                                                                       >
-  <G gcontact                                                             >
-   Address          [f11                                   ]*
-                    [f12                                   ]
-                    [f13                                   ]
-                    [f14                                   ]
-   Country          [f15               ]*   Postcode[f16   ]
+layout (text=%"Employees")
+  vbox
 
-   Phone Number     [f17               ]*
-   Mobile Number    [f18               ]*
-   Email            [f19                                   ]*
-  <                                                                       >
-  <G gdash                                                                >
-   [p31                                ][p32                             ]
-   [                                   ][                                ]
-  <                                                                       >
-  }
-  end --grid
+    vbox
+    
+      grid
+      {
+       [l01][f01   :       ]
+      }
+      end --grid
+
+      hbox
+      
+        vbox
+        
+          group (text=%"Name")
+            grid
+            {
+             [l02][f02                          ]*
+             [l03][f03                          ]
+             [l04][f04                          ]*
+             [l05][f05                          ]
+             [l06][f06       ]*
+            }
+            end --grid
+          end --group
+
+          group (text=%"Personal Details")
+            grid
+            {
+             [l07][f07       ]*         
+             [l08][x         ]*
+            }
+            end --grid
+          end --group 
+          
+        end --vbox
+        
+        grid
+        {
+         [p21                ]
+        }
+        end --grid  
+        
+      end --hbox
+      
+      group (text=%"Contact Details")
+        grid
+        {
+         [l11][f11                                   ]*
+              [f12                                   ]
+              [f13                                   ]
+              [f14                                   ]
+         [l15][f15               ]*  
+         [l16][f16   ]
+         [l17][f17               ]*
+         [l18][f18               ]*
+         [l19][f19                                   ]
+        } 
+        end --grid
+      end --group
+      
+    end --vbox
+    
+    group (text=%"Dashboard")
+      hbox
+      
+        grid
+        {
+        [p31                             ]
+        }
+        end --grid
+        
+        grid
+        {
+        [p32                             ]
+        }
+        end --grid
+        
+      end --hbox
+    end --group
+    
+  end --vbox
 end --layout
 
 tables
@@ -38,36 +90,46 @@ tables
 end --tables
   
 attributes
+  label l01 : label01, text=%"Employee Number";
   f01 = employee.employee_no;
 
-  group gname: text="Name";
+  label l02 : label02, text=%"First Name";
   f02 = employee.firstname;
+  label l03 : label03, text=%"Middle Name(s)";
   f03 = employee.middlenames;
+  label l04 : label04, text=%"Surname";
   f04 = employee.surname;
+  label l05 : label05, text=%"Preferred Name";
   f05 = employee.preferredname;
+  label l06 : label06, text=%"Title";
   combobox f06 = employee.title_id, not null;
 
-  group gpersonal: text="Personal Details";
+  label l07 : label07, text=%"Birth Date";
   dateedit f07 = employee.birthdate;
-  radiogroup x = employee.gender, not null, items=(("M","Male"),("F","Female")), orientation=horizontal;
+  label l08 : label08, text=%"Gender";
+  radiogroup x = employee.gender, not null, 
+    items=(("M","Male"),("F","Female")), orientation=horizontal;
 
-  group gcontact: text="Contact Details", style="collapsible";
+  label l11 : label11, text=%"Address";
   f11 = employee.address1;
   f12 = employee.address2;
   f13 = employee.address3;
   f14 = employee.address4;
+  label l15 : label15, text=%"Country";
   combobox f15 = employee.country_id, not null;
+  label l16 : label16, text=%"Postcode";
   f16 = employee.postcode;
-    
+
+  label l17 : label17, text=%"Phone";
   f17 = employee.phone;
+  label l18 : label18, text=%"Mobile";
   f18 = employee.mobile;
+  label l19 : label19, text=%"Email";
   f19 = employee.email;
 
-  image p21 = formonly.photo, width=12 characters, height=6 characters, sizepolicy=fixed, autoscale;
+--  image p21 = formonly.photo, width=12 characters, height=6 characters, sizepolicy=fixed, autoscale;
+  image p21 = formonly.photo, stretch=both, autoscale;
 
-  group gdash: text="Dashboard", style="collapsible";  
-  --% image p31 = formonly.dash1, width=24 characters, height=12 characters, sizepolicy=fixed, autoscale;
-  --% image p32 = formonly.dash2, width=24 characters, height=12 characters, sizepolicy=fixed, autoscale;
   webcomponent p31 = formonly.dash1, componenttype="wc_c3chart", scrollbars=none, stretch=both;
   webcomponent p32 = formonly.dash2, componenttype="wc_c3chart", scrollbars=none, stretch=both;
 end --attributes
