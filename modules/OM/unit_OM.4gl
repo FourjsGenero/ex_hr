@@ -1,5 +1,5 @@
 #
-# Dom_Test.4gl  Unit tests for Dom module
+# unit_OM.4gl  Unit tests for OM module
 #
 
 import FGL OM_

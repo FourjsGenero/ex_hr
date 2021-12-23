@@ -71,7 +71,7 @@
     <ExtProject filePath="../OM/OM.4pw" id="1330589589"/>
     <ExtProject filePath="../Common/Common.4pw" id="2122878952"/>
   </Group>
-  <Group environment="dir:BASE=$(ProjectDir)/../..,dirlist:FGLRESOURCEPATH=$(BASE)/resources:$(FGLRESOURCEPATH),dirlist:FGLSOURCEPATH=$(ProjectDir)/../OM:$(ProjectDir)/../Common:$(FGLSOURCEPATH):$(FGLDIR)/src,dirlist:FGLLDPATH=$(ProjectDir)/../lib;$(FGLLDPATH)" id="1979362422" label="Modules" language="Genero (no link)" targetDirectory="$(ProjectDir)/../../bin">
+  <Group environment="dir:BASE=$(ProjectDir)/../..,dirlist:FGLRESOURCEPATH=$(BASE)/resources:$(FGLRESOURCEPATH),dirlist:FGLSOURCEPATH=$(ProjectDir)/../OM:$(ProjectDir)/../Common:$(FGLSOURCEPATH):$(FGLDIR)/src,dirlist:FGLLDPATH=$(ProjectDir)/../lib;$(FGLLDPATH)" id="1979362422" label="Modules" language="Genero (no link)" targetDirectory="$(ProjectDir)">
     <Library binaryName="Library" id="-1577930998" label="Library" targetDirectory="$(ProjectDir)/../lib">
       <File filePath="UI_.4gl"/>
     </Library>

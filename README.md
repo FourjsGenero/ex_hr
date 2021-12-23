@@ -65,3 +65,21 @@ Configs:
 * hr-R2: Rev 2 - After some fine-tuning
 
 NOTE: If it doesn't Build All successfully the first time, just Build All again.
+
+
+NOT USING STUDIO?
+While this example is best experienced using Genero Studio, you can still build and using the command line on Unix/Linux using make:
+
+To build all from the project root:
+
+  make
+
+To run:
+
+  make run
+  make run-r1
+  make run-r2
+
+To clean
+
+  make clean

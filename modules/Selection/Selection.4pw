@@ -67,7 +67,7 @@
   </Settings>
   <LanguageList version="1.0"/>
   <PlatformList version="1.0"/>
-  <Group environment="dirlist:FGLLDPATH=$(ProjectDir)/../lib;$(FGLLDPATH)" id="986258416" label="Modules" language="Genero (no link)" targetDirectory="$(ProjectDir)/../../bin">
+  <Group environment="dirlist:FGLLDPATH=$(ProjectDir)/../lib;$(FGLLDPATH)" id="986258416" label="Modules" language="Genero (no link)" targetDirectory="$(ProjectDir)">
     <Library binaryName="Library" id="409567641" label="Library" targetDirectory="$(ProjectDir)/../lib">
       <File filePath="Selection.4gl"/>
       <File filePath="Selection_Find.per"/>

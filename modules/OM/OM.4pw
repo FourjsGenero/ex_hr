@@ -67,7 +67,7 @@
   </Settings>
   <LanguageList version="1.0"/>
   <PlatformList version="1.0"/>
-  <Group environment="dirlist:FGLLDPATH=$(ProjectDir)/../../bin:$(FGLLDPATH)" id="388949132" label="Modules" language="Genero (no link)" targetDirectory="$(ProjectDir)/../../bin">
+  <Group environment="dirlist:FGLLDPATH=$(ProjectDir)/../../bin:$(FGLLDPATH)" id="388949132" label="Modules" language="Genero (no link)" targetDirectory="$(ProjectDir)">
     <Library binaryName="Library" id="-519700538" label="Library" targetDirectory="$(ProjectDir)/../lib">
       <File filePath="OM_.4gl"/>
     </Library>

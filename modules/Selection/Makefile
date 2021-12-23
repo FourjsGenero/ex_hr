@@ -2,13 +2,11 @@
 # Makefile for Selection module
 #
 
-### Environment ###
-#% FGLDBPATH := ../../bin:$(FGLDBPATH)
-
-
 ### Locations ###
-BIN = ../../bin
+LIB = ../lib
 
+### Environment ###
+FGLLDPATH := $(LIB):$(FGLLDPATH)
 
 
 ### Default Rules ###
@@ -23,35 +21,29 @@ BIN = ../../bin
 
 
 ### Local vars ###
-Selection = Selection.42r
-Apps = $(Selection)
+Unit = unit_Selection.42m
+
+Shared_Objects =  \
+	$(LIB)/Selection.42m \
+
+Local_Objects = $(shell basename $(Shared_Objects))
 
 
+#
+# Build
+#
 
 ### Default build ###
-all: $(Apps)
+all: $(Unit)
 
+$(Unit) : $(Shared_Objects)
 
-
-#
-# Apps
-#
-
-
-Selection_Objects =  \
-	Selection_Unit.42m \
-	Selection.42m \
-
-$(Selection) : $(Selection_Objects)
-	fgl2p -o $@ $(Selection_Objects)
-
+$(Shared_Objects) : $(Local_Objects)
+	cp -a $(Local_Objects) $(LIB)
 
 clean :
-	rm -f *.42?
+	rm -f *.42? $(Shared_Objects)
 
-install :
-	cp -a *.42? $(BIN)
-
-
-run: $(Apps)
+run: $(Unit)
 	fglrun $?
+

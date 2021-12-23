@@ -2,13 +2,11 @@
 # Makefile for UI module
 #
 
-### Environment ###
-#% FGLDBPATH := ../../bin:$(FGLDBPATH)
-
-
 ### Locations ###
-BIN = ../../bin
+LIB = ../lib
 
+### Environment ###
+FGLLDPATH := $(LIB):$(FGLLDPATH)
 
 
 ### Default Rules ###
@@ -23,35 +21,29 @@ BIN = ../../bin
 
 
 ### Local vars ###
-UI = UI.42r
-Apps = $(UI)
+Unit = unit_UI.42m
+
+Shared_Objects =  \
+	$(LIB)/UI_.42m \
+
+Local_Objects = $(shell basename $(Shared_Objects))
 
 
+#
+# Build
+#
 
 ### Default build ###
-all: $(Apps)
+all: $(Unit)
 
+$(Unit) : $(Shared_Objects)
 
-
-#
-# Apps
-#
-
-
-UI_Objects =  \
-	UI_Unit.42m \
-	UI_.42m \
-
-$(UI) : $(UI_Objects)
-	fgl2p -o $@ $(UI_Objects)
-
+$(Shared_Objects) : $(Local_Objects)
+	cp -a $(Local_Objects) $(LIB)
 
 clean :
-	rm -f *.42?
+	rm -f *.42? $(Shared_Objects)
 
-install :
-	cp -a *.42? $(BIN)
-
-
-run: $(Apps)
+run: $(Unit)
 	fglrun $?
+

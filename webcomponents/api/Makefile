@@ -1,9 +1,10 @@
 #
-# Makefile for Common modules
+# Makefile for wc3chart API
 #
 
 ### Locations ###
-LIB = ../lib
+LIB = ../../modules/lib
+BIN = ../../bin
 
 ### Environment ###
 FGLLDPATH := $(LIB):$(FGLLDPATH)
@@ -24,9 +25,8 @@ FGLLDPATH := $(LIB):$(FGLLDPATH)
 Unit = unit_Common.42m
 
 Shared_Objects =  \
-	$(LIB)/std.42m \
-	$(LIB)/db.42m \
-	$(LIB)/str.42m \
+	$(BIN)/wc_c3chart.42m \
+	$(BIN)/wc_c3chart.42f \
 
 Local_Objects = $(shell basename $(Shared_Objects))
 
@@ -36,12 +36,10 @@ Local_Objects = $(shell basename $(Shared_Objects))
 #
 
 ### Default build ###
-all: $(Unit)
-
-$(Unit) : $(Shared_Objects)
+all: $(Shared_Objects)
 
 $(Shared_Objects) : $(Local_Objects)
-	cp -a $(Local_Objects) $(LIB)
+	cp -a $(Local_Objects) $(BIN)
 
 clean :
 	rm -f *.42? $(Shared_Objects)

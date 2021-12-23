@@ -2,13 +2,11 @@
 # Makefile for OM module
 #
 
-### Environment ###
-#% FGLDBPATH := ../../bin:$(FGLDBPATH)
-
-
 ### Locations ###
-BIN = ../../bin
+LIB = ../lib
 
+### Environment ###
+FGLLDPATH := $(LIB):$(FGLLDPATH)
 
 
 ### Default Rules ###
@@ -23,35 +21,29 @@ BIN = ../../bin
 
 
 ### Local vars ###
-OM = OM.42r
-Apps = $(OM)
+Unit = unit_OM.42m
+
+Shared_Objects =  \
+	$(LIB)/OM_.42m \
+
+Local_Objects = $(shell basename $(Shared_Objects))
 
 
+#
+# Build
+#
 
 ### Default build ###
-all: $(Apps)
+all: $(Unit)
 
+$(Unit) : $(Shared_Objects)
 
-
-#
-# Apps
-#
-
-
-OM_Objects =  \
-	OM_Unit.42m \
-	OM_.42m \
-
-$(OM) : $(OM_Objects)
-	fgl2p -o $@ $(OM_Objects)
-
+$(Shared_Objects) : $(Local_Objects)
+	cp -a $(Local_Objects) $(LIB)
 
 clean :
-	rm -f *.42?
+	rm -f *.42? $(Shared_Objects)
 
-install :
-	cp -a *.42? $(BIN)
+run: $(Unit)
+	fglrun $?
 
-
-run: $(hr0)
-	fglrun $<
