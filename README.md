@@ -70,6 +70,10 @@ NOTE: If it doesn't Build All successfully the first time, just Build All again.
 NOT USING STUDIO?
 While this example is best experienced using Genero Studio, you can still build and using the command line on Unix/Linux using make:
 
+Environment
+The environment can be set from ~/set.env or ~/hr/Makefile.
+Note that you should set LANG to your UTF-8 based locale, eg. en_US.UTF-8.
+
 To build all from the project root:
 
   make

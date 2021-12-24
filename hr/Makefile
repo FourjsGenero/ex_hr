@@ -11,6 +11,7 @@ SCH = $(ProjectDir)/model
 
 ### Environment ###
 #.EXPORT_ALL_VARIABLES:
+# export LANG := en_AU.UTF-8
 export FGLLDPATH := $(LIB):$(BIN):$(FGLLDPATH)
 export FGLDBPATH := $(SCH):$(FGLDBPATH)
 export FGLIMAGEPATH := $(ProjectDir)/resources/image2font.txt:$(ProjectDir)/resources:$(ProjectDir)/images:$(ProjectDir):$(FGLDIR)/lib/image2font.txt:$(FGLDIR)/lib
@@ -79,11 +80,11 @@ bin_Forms = \
 	$(BIN)/Employee-R2.42f \
 	$(BIN)/Employee.42f \
 
-hr_Apps = $(shell basename $(bin_Apps))
+hr_Apps = $(shell basename -a $(bin_Apps))
 
-hr_Objects = $(shell basename $(bin_Objects))
+hr_Objects = $(shell basename -a $(bin_Objects))
 
-hr_Forms = $(shell basename $(bin_Forms))
+hr_Forms = $(shell basename -a $(bin_Forms))
 
 
 #

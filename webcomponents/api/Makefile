@@ -28,7 +28,7 @@ Shared_Objects =  \
 	$(BIN)/wc_c3chart.42m \
 	$(BIN)/wc_c3chart.42f \
 
-Local_Objects = $(shell basename $(Shared_Objects))
+Local_Objects = $(shell basename -a $(Shared_Objects))
 
 
 #

@@ -26,7 +26,7 @@ Unit = unit_UI.42m
 Shared_Objects =  \
 	$(LIB)/UI_.42m \
 
-Local_Objects = $(shell basename $(Shared_Objects))
+Local_Objects = $(shell basename -a $(Shared_Objects))
 
 
 #

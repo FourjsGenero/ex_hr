@@ -28,7 +28,7 @@ Shared_Objects =  \
 	$(LIB)/db.42m \
 	$(LIB)/str.42m \
 
-Local_Objects = $(shell basename $(Shared_Objects))
+Local_Objects = $(shell basename -a $(Shared_Objects))
 
 
 #
