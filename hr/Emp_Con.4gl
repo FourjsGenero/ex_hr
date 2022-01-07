@@ -38,8 +38,9 @@ private define
     detail_edit string,
     map string,
     opt string  --%R1: responsive options
-  end record,
-  m_vpShow boolean = true --%R1: show current viewport size
+  end RECORD,
+  m_docTouched boolean = FALSE,
+  m_vpShow boolean = TRUE --%R1: show current viewport size
 
 
 
@@ -165,10 +166,6 @@ public function Show(p_opt string)
       -- deactivate record indicator
       call dialog.setActionActive("record", 0)
 
-    -- Setup brackground monitoring of touched fields
-    {%OPT}
-    on idle 1
-      call document_Touched(dialog, NULL)
       
     #
     # Common actions to all sub-dialogs
@@ -216,7 +213,7 @@ public function Show(p_opt string)
       let l_status = r_view.doc.Put()
      if l_status = "OK"
       then
-        call document_Touched(dialog, false)
+        call document_Touched(dialog, FALSE)
         message "Saved"
         call view_Refresh(dialog)
       else
@@ -352,12 +349,6 @@ private dialog employee_Edit()
     from emp_hdr.*, emp_dtl.*, sick_balance, annual_balance, photo, map, 
       photox --%R1:mirror
     attributes(without defaults=true)
-    
-    on change firstname, middlenames, surname, preferredname, title_id,
-      birthdate, gender, address1, address2, address3, address4,
-      country_id, postcode, phone, mobile, email, startdate, position,
-      taxnumber, base, basetype, sick_balance, annual_balance
-      call document_Touched(dialog, TRUE)
 
     {%%% Not required for Web, but we could for desktop ----
     after field firstname, middlenames, surname, preferredname, title_id,
@@ -385,6 +376,9 @@ private dialog employee_Edit()
         call dialog.nextField(field_name)
       end if
 
+    on action dialogtouched
+      call document_Touched(dialog, true)
+      
   end input
   
 end dialog
@@ -396,27 +390,35 @@ end dialog
 #+ Edit Reviews
 #+
 #+ @code
-#+ subialog annualLeave_Edit
+#+ subdialog review_Edit
 #
 private dialog review_Edit()
     
   input array r_view.doc.review from review_scr.*
     attributes (without defaults)
-      
-    on change review_date, summary
-      call document_Touched(dialog, TRUE) 
-      
-    after delete
-      call document_Touched(dialog, TRUE)
+
+    on action dialogtouched
+      call document_Touched(dialog, true)
   end input 
   
 end dialog
 
+#
+#! reviewDetail_Edit
+#+ Edit Review Details
+#+
+#+ @code
+#+ subdialog reviewDetail_Edit
+#
 private dialog reviewDetail_Edit()
 
   --%%% input m_editor from reviewdetail_scr.detail_edit
   input by name mr_data.detail_edit
     attributes (without defaults)
+    
+    on action dialogtouched
+      call document_Touched(dialog, true)
+      
   end input
 
 end dialog
@@ -440,11 +442,12 @@ private dialog paySummary_Edit()
       
     on change pay_date, pay_amount
       call r_view.doc.Base_Set()
-      call document_Touched(dialog, TRUE)
 
     after delete
       call r_view.doc.Base_Set()
-      call document_Touched(dialog, TRUE)
+      
+    on action dialogtouched
+      call document_Touched(dialog, true)      
 
   end input 
   
@@ -463,12 +466,10 @@ private dialog qualification_Edit()
     
   input array r_view.doc.qualification from qualification_scr.*
     attributes (without defaults)
+
+    on action dialogtouched
+      call document_Touched(dialog, true)
       
-    on change qual_date, narrative
-      call document_Touched(dialog, TRUE) 
-      
-    after delete
-      call document_Touched(dialog, TRUE)
   end input 
   
 end dialog
@@ -486,12 +487,10 @@ private dialog sick_Edit()
 
   input array r_view.doc.sick from sick_scr.*
     attributes (without defaults)
-      
-    on change start_date, end_date, days, reason, medical
-      call document_Touched(dialog, TRUE)
-      
-    after delete
-      call document_Touched(dialog, TRUE)
+
+    on action dialogtouched
+      call document_Touched(dialog, true)
+
   end input
         
 end dialog
@@ -515,11 +514,13 @@ private dialog sickLeave_Edit()
       
     on change sick_date, sick_adjustment, sick_runningbalance 
       call r_view.doc.SickLeave_Balance()
-      call document_Touched(dialog, TRUE)
       
     after delete
       call r_view.doc.SickLeave_Balance()
-      call document_Touched(dialog, TRUE)
+
+    on action dialogtouched
+      call document_Touched(dialog, true)
+
   end input
         
 end dialog
@@ -537,12 +538,10 @@ private dialog leave_Edit()
       
   input array r_view.doc.leave from leave_scr.*
     attributes (without defaults)
-      
-    on change start_date, end_date, days, reason, approved
-      call document_Touched(dialog, TRUE) 
-      
-    after delete
-      call document_Touched(dialog, TRUE)
+
+    on action dialogtouched
+      call document_Touched(dialog, true)
+
   end input 
 
 end dialog
@@ -566,11 +565,13 @@ private dialog annualLeave_Edit()
       
     on change annual_date, annual_adjustment, annual_runningbalance
       call r_view.doc.AnnualLeave_Balance()
-      call document_Touched(dialog, TRUE) 
       
     after delete
       call r_view.doc.AnnualLeave_Balance()
-      call document_Touched(dialog, TRUE)
+
+    on action dialogtouched
+      call document_Touched(dialog, true)
+
   end input 
 
 end dialog
@@ -588,12 +589,10 @@ private dialog travel_Edit()
       
   input array r_view.doc.travel from travel_scr.*
     attributes (without defaults)
-      
-    on change start_date, end_date, days, reason, approved
-      call document_Touched(dialog, TRUE) 
-      
-    after delete
-      call document_Touched(dialog, TRUE)
+
+    on action dialogtouched
+      call document_Touched(dialog, true)
+
   end input 
 
 end dialog
@@ -615,9 +614,6 @@ end dialog
 private function row_Set(po_dialog ui.Dialog, p_row INTEGER)
     
   call confirm_Save(po_dialog)
-  --% let l_row = po_dialog.visualToArrayIndex(k_screenList, p_row)
-  --% let l_row = po_dialog.arrayToVisualIndex(k_screenList, p_row)
-  --% let l_row = Employee.ListItem_Key(p_row)
   call po_dialog.setCurrentRow(k_screenList, p_row)
   call r_view.doc.Get(r_view.list.Key(p_row))
   call data_Load(r_view.doc)
@@ -695,7 +691,7 @@ end function
 
 private function confirm_Cancel(po_dialog ui.Dialog)
 
-  if UI_.Fields_Touched(po_dialog, ma_fields, NULL)
+  if m_docTouched
   then
     if fgldialog.fgl_winQuestion("Discard Changes?",
       "The current document has been modified.\nDo you wish to discard these changes?",
@@ -750,11 +746,8 @@ private function confirm_Delete(po_dialog ui.Dialog)
       # remove line and repositon to next or previous record
       let l_row = po_dialog.getCurrentRow(k_screenList)
       call document_Touched(po_dialog, FALSE)
-      --% call Selection.Refresh()
-      --% call po_dialog.deleteRow(k_screenList, l_row)
       call view_Refresh(po_dialog)
       call po_dialog.setCurrentRow(k_screenList, l_row)
-      --% let l_deleted = TRUE
     end if
     message ""
   end if
@@ -778,7 +771,7 @@ end function
 
 private function confirm_Save(po_dialog ui.Dialog)
 
-  if UI_.Fields_Touched(po_dialog, ma_fields, NULL)
+  if m_docTouched
   then
     if fgldialog.fgl_winQuestion("Unsaved Document",
       "The current document has been modified.\nDo you wish to Save this document?",
@@ -815,21 +808,12 @@ end function
 #
 private function document_Touched(po_dialog ui.Dialog, p_state boolean)
 
-  define
-    l_state boolean,
-    l_void string
+  -- Set touched state if state defined
+  let m_docTouched = NVL(p_state, m_docTouched)
 
-
-  -- Reset touched state if state defined
-  if p_state is not NULL
-  then
-    let l_void = UI_.Fields_Touched(po_dialog, ma_fields, p_state)
-  end if
-  
   -- Set Save/Cancel button active according to state of document
-  let l_state = UI_.Fields_Touched(po_dialog, ma_fields, NULL)
-  call po_dialog.setActionActive("save", l_state)
-  call po_dialog.setActionActive("cancel", l_state)
+  call po_dialog.setActionActive("save", m_docTouched)
+  call po_dialog.setActionActive("cancel", m_docTouched)
   
 end function
 

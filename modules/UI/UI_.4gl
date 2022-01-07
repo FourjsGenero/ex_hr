@@ -82,7 +82,7 @@ import FGL OM_
 #+   call UI_.ButtonEdit_ButtonActive("l_search", "search", TRUE)
 #
 
-function ButtonEdit_ButtonActive(p_name string, p_image string, p_active boolean)
+public function ButtonEdit_ButtonActive(p_name string, p_image string, p_active boolean)
   returns ()
 
   define
