@@ -10,7 +10,7 @@ using Genero features.
 The example runs from a sqlite database in
 $(ProjectDir)/data/hr.db
 
-##Summary of Features in this Demo
+## Summary of Features in this Demo
 
 UX enhancements include:
 * Responsive
@@ -58,7 +58,7 @@ Other
 * "Record n of m" indicator is now an inactive button on the dialog bar instead of a message
 
 
-##RESPONSIVE Variations
+## RESPONSIVE Variations
 
 Configs:
 * hr: the original before any responsive features added
@@ -68,10 +68,10 @@ Configs:
 NOTE: If it doesn't Build All successfully the first time, just Build All again.
 
 
-##NOT USING STUDIO?
+## NOT USING STUDIO?
 While this example is best experienced using Genero Studio, you can still build and using the command line on Unix/Linux using make:
 
-##Environment
+## Environment
 The environment can be set from ~/set.env or ~/hr/Makefile.
 Note that you should set LANG to your UTF-8 based locale, eg. en_US.UTF-8.
 
@@ -90,9 +90,9 @@ To clean
   make clean
 
 
-##Screen Shots
+## Screen Shots
 
-This is the application running in a browser
+This is the application running in a Browser
 
 ![Browser Client](https://user-images.githubusercontent.com/20328875/219250407-b4f709a5-6531-45e4-be29-fb1991ff50b8.png "Browser Client")
 
@@ -101,6 +101,8 @@ Here are shots of the various pages of the application running in the Desktop Cl
 ![Desktop Client 1](https://user-images.githubusercontent.com/20328875/219250430-4d2b5eac-3c15-4d5c-aeb5-2097624b6c02.png "Desktop Client 1")
 
 ![Desktop Client 2](https://user-images.githubusercontent.com/20328875/219250435-28bf6e5e-e7c2-4203-bfae-2ce7dbf9bf97.png "Desktop Client 2")
+
+and changing the form factor of the Desktop Client
 
 ![Desktop Client 3](https://user-images.githubusercontent.com/20328875/219250448-e520707b-ff65-4451-be9d-9c76d09a64a8.png "Desktop Client 3")
 
@@ -129,9 +131,9 @@ and the same application now running on a mobile phone adapting to the smalleest
 ![iPhone 5](https://user-images.githubusercontent.com/20328875/219250492-5cc2ce4a-584a-4d17-a21a-7f4a6a825f8b.png "iPhone 5")
 
 
-##Additional Resources
+## Additional Resources
 
-###Adding Responsiveness to your Application
+### Adding Responsiveness to your Application
 
 Presentation from WWDC21 which takes you step by step through the process of making this example application responsive:
 https://4js.com/files/documents/wwdc21/genero_4.00/B1-Responsive-01B.pdf
