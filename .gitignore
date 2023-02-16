@@ -2,3 +2,6 @@
 *.4pwdb
 *.4pwvs
 *.4pwcfg
+*.4pdb
+*.gar
+tmp/
