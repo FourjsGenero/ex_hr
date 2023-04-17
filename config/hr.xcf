@@ -3,6 +3,10 @@
   <EXECUTION>
     <ENVIRONMENT_VARIABLE Id="FGLPROFILE">db.prof:$(res.path.fglprofile)</ENVIRONMENT_VARIABLE>
     <PATH>$(res.deployment.path)/.</PATH>
-    <MODULE>hr.42r</MODULE>
+    <MODULE>Emp_Main</MODULE>
+    <PARAMETERS>
+      <!-- Responsive mode -->
+      <PARAMETER>-R2</PARAMETER>
+    </PARAMETERS>
   </EXECUTION>
 </APPLICATION>
