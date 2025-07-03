@@ -1,8 +1,8 @@
 # ex_hr
-UPDATED for 4.00
+UPDATED for 5.01
 
 Example program demonstrating the refactoring of a simple HR application
-using various features of Genero 4.00. No, it's not a complete application
+using various features of Genero 5.01. No, it's not a complete application
 from a data perspective as some of the data is generated,
 it's purpose was primarily to demonstrate various UX and DX enhancements
 using Genero features.
@@ -88,6 +88,22 @@ To run:
 To clean
 
   make clean
+
+
+## Generate Documentation
+System documention can be generated for public types, functions and methods by compiling overview.4gl:
+
+STUDIO
+  Right-click on Project/Documentation/Docs/overview.4gl and Compile File
+
+MAKE
+  make doc
+
+Command line
+  fglcomp --build-doc overview.4gl
+
+If you want the private definitions as well, add this to the compile option:
+  --doc-private
 
 
 ## Screen Shots

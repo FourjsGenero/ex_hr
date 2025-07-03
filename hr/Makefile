@@ -101,6 +101,9 @@ $(bin_Apps) $(bin_Objects) $(bin_Forms) : $(hr_Apps) $(hr_Objects) $(hr_Forms)
 clean :
 	rm -f *.42? $(bin_Apps) $(bin_Objects) $(bin_Forms)
 
+cleandoc :
+	rm -f *.html *.xa
+
 run: $(bin_Apps)
 	cd $(BIN)
 	fglrun $?

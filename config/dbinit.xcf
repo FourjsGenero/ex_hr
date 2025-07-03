@@ -4,10 +4,9 @@
     <ENVIRONMENT_VARIABLE Id="DBDATE">DMY4/</ENVIRONMENT_VARIABLE>
     <ENVIRONMENT_VARIABLE Id="FGLPROFILE">db.prof:$(res.path.fglprofile)</ENVIRONMENT_VARIABLE>
     <PATH>$(res.deployment.path)/.</PATH>
-    <MODULE>Emp_Main</MODULE>
+    <MODULE>dbcreate_hr_pgs</MODULE>
     <PARAMETERS>
-      <!-- Responsive mode -->
-      <PARAMETER>-R2</PARAMETER>
+      <PARAMETER>-init</PARAMETER>
     </PARAMETERS>
   </EXECUTION>
 </APPLICATION>

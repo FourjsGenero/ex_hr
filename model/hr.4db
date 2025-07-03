@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Schema gstVersion="30a09" id="{a4d17335-cea8-4016-871e-f48af9417503}" version="4.0">
+<Schema gstVersion="50102" id="{a4d17335-cea8-4016-871e-f48af9417503}" version="5.0">
   <AGSettings version="1.1">
-    <DynamicProperties version="2">
+    <DynamicProperties version="4">
       <DynamicProperty description="Associated label when generating form" initialValue="" isDefaultInherited="false" isHidden="false" label="Label" name="label" readOnly="false" type="TEXT"/>
       <DynamicProperty description="Associated widget" editorInfo="contains:ButtonEdit|CheckBox|ComboBox|DateEdit|DateTimeEdit|Edit|FFImage|FFLabel|Field|Phantom|ProgressBar|RadioGroup|Slider|SpinEdit|TextEdit|TimeEdit" initialValue="Edit" isDefaultInherited="false" isHidden="false" label="Widget" name="widget" readOnly="false" type="ENUM"/>
-      <DynamicPropertyGroup collapsed="false" description="Formfied properties" label="Formfield" name="formfieldGroup" properties="label;widget"/>
+      <DynamicPropertyGroup collapsed="false" description="Formfield properties" label="Formfield" name="formfieldGroup" properties="label;widget"/>
     </DynamicProperties>
     <NodeInfos version="1">
       <NodeInfo mimeType="db/column" properties="widget;label"/>
@@ -13,6 +13,10 @@
   <ExtractionSettings last="IBM Informix">
     <ExtractionOptions casens="LowerCase" cvmeth="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" ignerr="true" systab="false" type="IBM Informix"/>
   </ExtractionSettings>
+  <GenerationSettings>
+    <GenerationOptions casens="LowerCase" generate="true" genidx="true" genpk="1" genuq="1" national="false" nobackup="false" populate="false" version="IBM Informix"/>
+    <GenerationOptions casens="LowerCase" generate="true" genidx="true" genpk="1" genuq="1" national="false" nobackup="false" populate="false" version="PostgreSQL 8.4+"/>
+  </GenerationSettings>
   <Table active="true" name="activity" status="U" uuid="db/table2">
     <Column fglLength="8" fglType="0" name="activity_code" notNull="true" order="1" status="U" uuid="db/column2"/>
     <Column fglLength="30" fglType="0" name="description" notNull="true" order="2" status="U" uuid="db/column4"/>
@@ -166,7 +170,7 @@
   <Views ActiveView="View-1" showLabels="true">
     <View Name="View-1">
       <Layout>
-        <![CDATA[AAAAAgAAABQAZABiAC8AdABhAGIAbABlADEAMkCTi0tLS0tLQE6tLS0tLTA/3vnbItDlZwEAAAAUAGQAYgAvAHQAYQBiAGwAZQAyADJAcWAAAAAAAECD8AAAAAAAP/IUeuFHrdcBAAAAFABkAGIALwB0AGEAYgBsAGUANAAxQIxYAAAAAABAhbgAAAAAAD/0XjU/fO0NAQAAABIAZABiAC8AdABhAGIAbABlADJAlAXh4eHh4kBrQeHh4eHiP987ZFocrA8BAAAAEgBkAGIALwB0AGEAYgBsAGUANEBVA8PDw8PEQES0tLS0tLQ/8SsCDEm6PQEAAAAWAGQAYgAvAHQAYQBiAGwAZQAyADIAN0CMUAAAAAAAQIuYAAAAAAA/8zdLxqfvPQEAAAAUAGQAYgAvAHQAYQBiAGwAZQAxADhAjkgAAAAAAEBdQAAAAAAAP+Ao9cKPXCwBAAAAFgBkAGIALwB0AGEAYgBsAGUAMgAyADNAgaAAAAAAAECFeAAAAAAAP/LtkWhyr8kBAAAAEgBkAGIALwB0AGEAYgBsAGUANkCB6AAAAAAAwFjAAAAAAAA/8l41P3ztSwEAAAAWAGQAYgAvAHQAYQBiAGwAZQAyADIAOUCB+AAAAAAAQJBcAAAAAAA/8x64UeuEwQEAAAAUAGQAYgAvAHQAYQBiAGwAZQAxADZAjXAAAAAAAEBxsAAAAAAAP+h64UeuFIABAAAAFABkAGIALwB0AGEAYgBsAGUAMQA0QJOB4eHh4eLAWN4eHh4eHj/euFHrhR6/AQAAABQAZABiAC8AdABhAGIAbABlADIAMEBw4AAAAAAAQH4AAAAAAAA/9C0OVgQYFQEAAAAWAGQAYgAvAHQAYQBiAGwAZQAyADIANUCByAAAAAAAQIqwAAAAAAA/8v3ztkWhcQEAAAASAGQAYgAvAHQAYQBiAGwAZQA4QF6AAAAAAADAW8AAAAAAAD/HbItDlYELAQAAABQAZABiAC8AdABhAGIAbABlADEAMEBgAeHh4eHiQHLVpaWlpaY/xmZmZmZmawE=]]>
+        <![CDATA[AAAAAgAAABYAZABiAC8AdABhAGIAbABlADIAMgAzQIGgAAAAAABAhXgAAAAAAD/y7ZFocq/JAQAAABQAZABiAC8AdABhAGIAbABlADQAMUCMWAAAAAAAQIW4AAAAAAA/9F41P3ztDQEAAAAWAGQAYgAvAHQAYQBiAGwAZQAyADIAN0CMUAAAAAAAQIuYAAAAAAA/8zdLxqfvPQEAAAAWAGQAYgAvAHQAYQBiAGwAZQAyADIAOUCB+AAAAAAAQJBcAAAAAAA/8x64UeuEwQEAAAAUAGQAYgAvAHQAYQBiAGwAZQAxADRAk4Hh4eHh4sBY3h4eHh4eP964UeuFHr8BAAAAEgBkAGIALwB0AGEAYgBsAGUANEBVA8PDw8PEQES0tLS0tLQ/8SsCDEm6PQEAAAAUAGQAYgAvAHQAYQBiAGwAZQAxADJAk4tLS0tLS0BOrS0tLS0wP9752yLQ5WcBAAAAFABkAGIALwB0AGEAYgBsAGUAMgAyQHFgAAAAAABAg/AAAAAAAD/yFHrhR63XAQAAABQAZABiAC8AdABhAGIAbABlADEANkCNcAAAAAAAQHGwAAAAAAA/6HrhR64UgAEAAAAUAGQAYgAvAHQAYQBiAGwAZQAxADhAjkgAAAAAAEBdQAAAAAAAP+Ao9cKPXCwBAAAAEgBkAGIALwB0AGEAYgBsAGUANkCB6AAAAAAAwFjAAAAAAAA/9G6XjU/etQEAAAAWAGQAYgAvAHQAYQBiAGwAZQAyADIANUCByAAAAAAAQIqwAAAAAAA/8v3ztkWhcQEAAAAUAGQAYgAvAHQAYQBiAGwAZQAxADBAYAHh4eHh4kBy1aWlpaWmP8ZmZmZmZmsBAAAAEgBkAGIALwB0AGEAYgBsAGUAOEBegAAAAAAAwFvAAAAAAAA/x2yLQ5WBCwEAAAAUAGQAYgAvAHQAYQBiAGwAZQAyADBAcOAAAAAAAEB+AAAAAAAAP/QtDlYEGBUBAAAAEgBkAGIALwB0AGEAYgBsAGUAMkCUBeHh4eHiQGtB4eHh4eI/3ztkWhysDwE=]]>
       </Layout>
     </View>
   </Views>

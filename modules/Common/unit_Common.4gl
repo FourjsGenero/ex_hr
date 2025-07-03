@@ -18,7 +18,7 @@ import FGL str
 main
 
   call Setup()
-  call Run("STR")
+  call Run(nvl(arg_val(1), "STR"))
   call Teardown()
   
 end main
@@ -33,6 +33,8 @@ public function Run(p_request string)
   case p_request
     when "STR"
       call test_Hash()
+    when "DB"
+      call test_Db()
   end case
   
 end function
@@ -53,6 +55,16 @@ end function
 #
 private function Teardown()
   
+end function
+
+
+#
+#! test_Db
+#
+private function test_Db()
+
+  display sfmt("test_Db: %1", db.Connect("hr@localhost:5432+driver='dbmpgs'", "postgres", "postgres"))
+
 end function
 
 

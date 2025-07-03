@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='ASCII'?>
-<api_class name="Emp_Unit" package="hr" top="../" next="Employee" prev="Emp_Con">
-  <function name="main" modifier="public"/>
-  <function name="Run" modifier="public">
-    <api_param name="p_request" type="STRING"/>
-  </function>
-</api_class>

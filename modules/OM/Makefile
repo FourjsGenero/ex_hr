@@ -44,6 +44,9 @@ $(Shared_Objects) : $(Local_Objects)
 clean :
 	rm -f *.42? $(Shared_Objects)
 
+cleandoc :
+	rm -f *.html *.xa
+
 run: $(Unit)
 	fglrun $?
 

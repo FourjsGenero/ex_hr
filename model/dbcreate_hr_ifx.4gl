@@ -31,7 +31,7 @@ FUNCTION db_create_tables()
         middlenames CHAR(30),
         surname CHAR(30) NOT NULL,
         preferredname CHAR(30),
-        title_id CHAR(5) NOT NULL,
+        title_id CHAR(8) NOT NULL,
         birthdate DATE NOT NULL,
         gender CHAR(1) NOT NULL,
         address1 CHAR(40) NOT NULL,
@@ -77,15 +77,45 @@ FUNCTION db_create_tables()
     EXECUTE IMMEDIATE "CREATE TABLE title (
         title_id CHAR(8) NOT NULL,
         description CHAR(20) NOT NULL)"
-    EXECUTE IMMEDIATE "CREATE TABLE qualfication (
+    EXECUTE IMMEDIATE "CREATE TABLE qualification (
         employee_no INTEGER NOT NULL,
         qual_date DATE NOT NULL,
         qual_id CHAR(8) NOT NULL,
-        narrative CHAR(30))"
+        narrative VARCHAR(80))"
     EXECUTE IMMEDIATE "CREATE TABLE qual_type (
         qual_id CHAR(8) NOT NULL,
         level INTEGER NOT NULL,
-        description CHAR(30) NOT NULL)"
+        description CHAR(50) NOT NULL)"
+    EXECUTE IMMEDIATE "CREATE TABLE review (
+        employee_no INTEGER NOT NULL,
+        review_date DATE NOT NULL,
+        summary CHAR(50) NOT NULL,
+        detail LVARCHAR(1000))"
+    EXECUTE IMMEDIATE "CREATE TABLE leave (
+        employee_no INTEGER NOT NULL,
+        start_date DATE NOT NULL,
+        end_date DATE NOT NULL,
+        days DECIMAL(5,2) NOT NULL,
+        reason CHAR(50) NOT NULL,
+        approved CHAR(1) NOT NULL)"
+    EXECUTE IMMEDIATE "CREATE TABLE travel (
+        employee_no INTEGER NOT NULL,
+        start_date DATE NOT NULL,
+        end_date DATE NOT NULL,
+        days DECIMAL(5,2) NOT NULL,
+        reason CHAR(50) NOT NULL,
+        approved CHAR(1) NOT NULL)"
+    EXECUTE IMMEDIATE "CREATE TABLE sick (
+        employee_no INTEGER NOT NULL,
+        start_date DATE NOT NULL,
+        end_date DATE NOT NULL,
+        days DECIMAL(5,2) NOT NULL,
+        reason CHAR(50) NOT NULL,
+        medical CHAR(1) NOT NULL)"
+    EXECUTE IMMEDIATE "CREATE TABLE document (
+        employee_no INTEGER NOT NULL,
+        doc_id CHAR(40) NOT NULL,
+        content BYTE)"
 
 END FUNCTION
 
@@ -102,8 +132,13 @@ FUNCTION db_drop_tables()
     EXECUTE IMMEDIATE "DROP TABLE timesheet_hdr"
     EXECUTE IMMEDIATE "DROP TABLE country"
     EXECUTE IMMEDIATE "DROP TABLE title"
-    EXECUTE IMMEDIATE "DROP TABLE qualfication"
+    EXECUTE IMMEDIATE "DROP TABLE qualification"
     EXECUTE IMMEDIATE "DROP TABLE qual_type"
+    EXECUTE IMMEDIATE "DROP TABLE review"
+    EXECUTE IMMEDIATE "DROP TABLE leave"
+    EXECUTE IMMEDIATE "DROP TABLE travel"
+    EXECUTE IMMEDIATE "DROP TABLE sick"
+    EXECUTE IMMEDIATE "DROP TABLE document"
 
 END FUNCTION
 
@@ -138,52 +173,88 @@ FUNCTION db_add_constraints()
     EXECUTE IMMEDIATE "ALTER TABLE title ADD CONSTRAINT
         PRIMARY KEY (title_id)
         CONSTRAINT pk_honorific_1"
-    EXECUTE IMMEDIATE "ALTER TABLE qualfication ADD CONSTRAINT
+    EXECUTE IMMEDIATE "ALTER TABLE qualification ADD CONSTRAINT
         PRIMARY KEY (employee_no, qual_date)
-        CONSTRAINT pk_qualfication_1"
+        CONSTRAINT pk_qualification_1"
     EXECUTE IMMEDIATE "ALTER TABLE qual_type ADD CONSTRAINT
         PRIMARY KEY (qual_id)
         CONSTRAINT pk_qual_type_1"
-    EXECUTE IMMEDIATE "ALTER TABLE annualleave ADD CONSTRAINT 
+    EXECUTE IMMEDIATE "ALTER TABLE review ADD CONSTRAINT
+        PRIMARY KEY (employee_no, review_date)
+        CONSTRAINT pk_review_1"
+    EXECUTE IMMEDIATE "ALTER TABLE leave ADD CONSTRAINT
+        PRIMARY KEY (employee_no, start_date)
+        CONSTRAINT pk_leave_1"
+    EXECUTE IMMEDIATE "ALTER TABLE travel ADD CONSTRAINT
+        PRIMARY KEY (employee_no, start_date)
+        CONSTRAINT pk_travel_1"
+    EXECUTE IMMEDIATE "ALTER TABLE sick ADD CONSTRAINT
+        PRIMARY KEY (employee_no, start_date)
+        CONSTRAINT pk_sick_1"
+    EXECUTE IMMEDIATE "ALTER TABLE document ADD CONSTRAINT
+        PRIMARY KEY (employee_no, doc_id)
+        CONSTRAINT pk_document_1"
+    EXECUTE IMMEDIATE "ALTER TABLE annualleave ADD CONSTRAINT
         FOREIGN KEY (employee_no)
         REFERENCES employee (employee_no)
         CONSTRAINT cx_annlv001"
-    EXECUTE IMMEDIATE "ALTER TABLE paysummary ADD CONSTRAINT 
+    EXECUTE IMMEDIATE "ALTER TABLE paysummary ADD CONSTRAINT
         FOREIGN KEY (employee_no)
         REFERENCES employee (employee_no)
         CONSTRAINT cx_paysum001"
-    EXECUTE IMMEDIATE "ALTER TABLE sickleave ADD CONSTRAINT 
+    EXECUTE IMMEDIATE "ALTER TABLE sickleave ADD CONSTRAINT
         FOREIGN KEY (employee_no)
         REFERENCES employee (employee_no)
         CONSTRAINT cx_sicklv001"
-    EXECUTE IMMEDIATE "ALTER TABLE timesheet_dtl ADD CONSTRAINT 
+    EXECUTE IMMEDIATE "ALTER TABLE timesheet_dtl ADD CONSTRAINT
         FOREIGN KEY (tsheet_no)
         REFERENCES timesheet_hdr (tsheet_no)
         CONSTRAINT cx_tsdtl001"
-    EXECUTE IMMEDIATE "ALTER TABLE timesheet_dtl ADD CONSTRAINT 
+    EXECUTE IMMEDIATE "ALTER TABLE timesheet_dtl ADD CONSTRAINT
         FOREIGN KEY (activity_code)
         REFERENCES activity (activity_code)
         CONSTRAINT cx_tsdtl002"
-    EXECUTE IMMEDIATE "ALTER TABLE timesheet_hdr ADD CONSTRAINT 
+    EXECUTE IMMEDIATE "ALTER TABLE timesheet_hdr ADD CONSTRAINT
         FOREIGN KEY (employee_no)
         REFERENCES employee (employee_no)
         CONSTRAINT cx_tshdr001"
-    EXECUTE IMMEDIATE "ALTER TABLE qualfication ADD CONSTRAINT 
+    EXECUTE IMMEDIATE "ALTER TABLE qualification ADD CONSTRAINT
         FOREIGN KEY (qual_id)
         REFERENCES qual_type (qual_id)
-        CONSTRAINT fk_qualfication_qual_type_1"
-    EXECUTE IMMEDIATE "ALTER TABLE employee ADD CONSTRAINT 
+        CONSTRAINT fk_qualification_qual_type_1"
+    EXECUTE IMMEDIATE "ALTER TABLE employee ADD CONSTRAINT
         FOREIGN KEY (country_id)
         REFERENCES country (country_id)
         CONSTRAINT fk_employee_country_1"
-    EXECUTE IMMEDIATE "ALTER TABLE employee ADD CONSTRAINT 
+    EXECUTE IMMEDIATE "ALTER TABLE employee ADD CONSTRAINT
         FOREIGN KEY (title_id)
         REFERENCES title (title_id)
         CONSTRAINT fk_employee_title_1"
-    EXECUTE IMMEDIATE "ALTER TABLE qualfication ADD CONSTRAINT 
+    EXECUTE IMMEDIATE "ALTER TABLE qualification ADD CONSTRAINT
         FOREIGN KEY (employee_no)
         REFERENCES employee (employee_no)
-        CONSTRAINT fk_qualfication_employee_1"
+        CONSTRAINT fk_qualification_employee_1"
+    EXECUTE IMMEDIATE "ALTER TABLE review ADD CONSTRAINT
+        FOREIGN KEY (employee_no)
+        REFERENCES employee (employee_no)
+        ON DELETE CASCADE
+        CONSTRAINT fk_review_employee_1"
+    EXECUTE IMMEDIATE "ALTER TABLE leave ADD CONSTRAINT
+        FOREIGN KEY (employee_no)
+        REFERENCES employee (employee_no)
+        CONSTRAINT fk_leave_request_employee_1"
+    EXECUTE IMMEDIATE "ALTER TABLE travel ADD CONSTRAINT
+        FOREIGN KEY (employee_no)
+        REFERENCES employee (employee_no)
+        CONSTRAINT fk_leave_request_employee_1_1"
+    EXECUTE IMMEDIATE "ALTER TABLE sick ADD CONSTRAINT
+        FOREIGN KEY (employee_no)
+        REFERENCES employee (employee_no)
+        CONSTRAINT fk_leave_request_employee_1_1_1"
+    EXECUTE IMMEDIATE "ALTER TABLE document ADD CONSTRAINT
+        FOREIGN KEY (employee_no)
+        REFERENCES employee (employee_no)
+        CONSTRAINT fk_document_employee_1"
 
 END FUNCTION
 
@@ -197,10 +268,15 @@ FUNCTION db_drop_constraints()
     EXECUTE IMMEDIATE "ALTER TABLE timesheet_dtl DROP CONSTRAINT cx_tsdtl001"
     EXECUTE IMMEDIATE "ALTER TABLE timesheet_dtl DROP CONSTRAINT cx_tsdtl002"
     EXECUTE IMMEDIATE "ALTER TABLE timesheet_hdr DROP CONSTRAINT cx_tshdr001"
-    EXECUTE IMMEDIATE "ALTER TABLE qualfication DROP CONSTRAINT fk_qualfication_qual_type_1"
+    EXECUTE IMMEDIATE "ALTER TABLE qualification DROP CONSTRAINT fk_qualification_qual_type_1"
     EXECUTE IMMEDIATE "ALTER TABLE employee DROP CONSTRAINT fk_employee_country_1"
     EXECUTE IMMEDIATE "ALTER TABLE employee DROP CONSTRAINT fk_employee_title_1"
-    EXECUTE IMMEDIATE "ALTER TABLE qualfication DROP CONSTRAINT fk_qualfication_employee_1"
+    EXECUTE IMMEDIATE "ALTER TABLE qualification DROP CONSTRAINT fk_qualification_employee_1"
+    EXECUTE IMMEDIATE "ALTER TABLE review DROP CONSTRAINT fk_review_employee_1"
+    EXECUTE IMMEDIATE "ALTER TABLE leave DROP CONSTRAINT fk_leave_request_employee_1"
+    EXECUTE IMMEDIATE "ALTER TABLE travel DROP CONSTRAINT fk_leave_request_employee_1_1"
+    EXECUTE IMMEDIATE "ALTER TABLE sick DROP CONSTRAINT fk_leave_request_employee_1_1_1"
+    EXECUTE IMMEDIATE "ALTER TABLE document DROP CONSTRAINT fk_document_employee_1"
 
 END FUNCTION
 

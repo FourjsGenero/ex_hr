@@ -1,6 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<api_class name="str" package="webcomponents.api" top="../../" next="wc_c3chart">
-  <function name="ArraySet" modifier="public">
+<?xml version='1.0' encoding='ASCII'?>
+<api_class name="str" package="webcomponents.api.modules" top="../../../">
+  <function order_name=".ArraySet" name="ArraySet" modifier="public">
     <api_synopsis> Set a dynamic array of strings from JSONarray string</api_synopsis>
     <api_usage>
       <pre> define a_items dynamic array of string

@@ -222,12 +222,12 @@ public function Show(p_opt string)
 
     --%R1:{ helpful feedback for resizing: info toggles on/off, windowresized shows viewport size
     on action info
-      #let m_vpShow = not m_vpShow
-      #message "Viewport.Show: " || iif(m_vpShow, "ON", "OFF")
+      let m_vpShow = not m_vpShow
+      message "Viewport.Show: " || iif(m_vpShow, "ON", "OFF")
       call viewport_Show()
 
-    #on action windowresized
-    #  call viewport_Show()
+    on action windowresized
+      call viewport_Show()
     #--%R1:}
       
     on action cancel

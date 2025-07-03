@@ -7,7 +7,7 @@
     <MODULE>Emp_Main</MODULE>
     <PARAMETERS>
       <!-- Responsive mode -->
-      <PARAMETER>-R2</PARAMETER>
+      <PARAMETER>-R1</PARAMETER>
     </PARAMETERS>
   </EXECUTION>
 </APPLICATION>

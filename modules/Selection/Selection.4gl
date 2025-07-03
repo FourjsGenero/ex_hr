@@ -293,7 +293,7 @@ public function (this tQuery) SQL(p_select STRING)
     
   case p_select.toUpperCase()
   when "COUNT"
-    let l_query = "select count(*) from (", l_query, ")"
+    let l_query = "select count(*) from (", l_query, ") as emp_count"
   otherwise
     let l_query =  l_query,
       " ", iif(l_orderBy.getLength(), "order by " || l_orderBy, ""),

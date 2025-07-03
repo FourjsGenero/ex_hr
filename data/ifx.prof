@@ -1,0 +1,5 @@
+#
+# hr ifx database
+#
+dbi.database.hr.driver = "dbmifx"
+dbi.database.hr.source = "hr"

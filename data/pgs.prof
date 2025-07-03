@@ -1,0 +1,5 @@
+#
+# hr pgs database
+#
+dbi.database.hr.driver = "dbmpgs"
+dbi.database.hr.source = "hr"

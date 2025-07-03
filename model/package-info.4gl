@@ -1,5 +1,5 @@
 #+
-#+ src
+#+ model
 #+
-#+ Main menu and Unit tests for c3chart web comoonent
+#+ Data model and utilities for the HR app.
 #+

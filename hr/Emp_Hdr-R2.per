@@ -46,7 +46,7 @@ layout (text=%"Employees")
         
       end --hbox
       
-      group (text=%"Contact Details")
+      group (text=%"Contact Details", style="collapsible")
         grid
         {
          [l11][f11           ]*
@@ -64,7 +64,7 @@ layout (text=%"Employees")
       
     end --vbox
     
-    group (text=%"Dashboard", HIDDEN@SMALL)
+    group (text=%"Dashboard", HIDDEN@SMALL, style="collapsible")
       hbox (ORIENTATION@MEDIUM=VERTICAL)
       
         grid
